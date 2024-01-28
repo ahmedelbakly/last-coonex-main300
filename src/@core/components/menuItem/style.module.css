@@ -1,0 +1,87 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  flex: 1;
+  min-width: 400px;
+}
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 20px;
+  border-radius: 10px 10px 0px 0px;
+  border: 1px solid  #e2e2e2;
+  background:#fff;
+
+}
+.edit {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 20px;
+}
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 20px;
+}
+
+.contentShow {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: column;
+  width: 100%;
+  border-radius:  0px 0px 10px 10px;
+  border: 1px solid  #e2e2e2;
+  background:#fff;
+  padding: 20px;
+}
+.contentHide {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: column;
+  width: 100%;
+  border-radius:  0px 0px 10px 10px;
+  border: 1px solid  #e2e2e2;
+  background:#fff;
+  padding: 20px;
+ display: none;
+}
+
+.nextAndPrev {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px;
+}
+
+.nextAndPrev button {
+  border-radius: 10px;
+  border: 2px solid #1db2ff !important;
+  width: 101px;
+  height: 40px;
+  padding: 12px 20px;
+  color: black;
+  border: none;
+  cursor: pointer;
+  background: white;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.3s ease-in-out;
+}
+
+.nextAndPrev button:hover {
+  color: rgb(255, 255, 255);
+  background: #1db2ff;
+}
+.nextAndPrev .hideBtn {
+  visibility: hidden;
+}

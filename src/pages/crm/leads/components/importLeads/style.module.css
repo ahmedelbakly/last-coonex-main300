@@ -1,0 +1,143 @@
+.popUpContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, .9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+
+  & .popUp {
+    width: 600px;
+    height: 300px;
+    background-color: white;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 20px 50px;
+    position: relative;
+
+    & .closePopUp {
+      cursor: pointer;
+      position: absolute;
+      top: -7px;
+      right: -7px;
+      background-color: #fff;
+      border-radius: 5px;
+
+
+    }
+  }
+}
+
+.popUp h5 {
+  font-weight: 600;
+  font-size: 20px;
+  color: #3d3d3d;
+  text-align: center;
+  margin: 0;
+}
+
+.btnCon {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  margin-top: 20px;
+  width: 100%;
+  & .downloadBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+  }
+}
+
+.btnCon button {
+  border-radius: 10px;
+  border: 1px solid #1db2ff;
+  background-color: #fff;
+  padding: 12px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.btnCon button:hover {
+  color: rgb(255, 255, 255);
+  background: #1db2ff;
+}
+
+.downAndNext {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+
+.inputContainer {
+  display: flex;
+  height: 99px;
+  padding: 16px 0px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid #e2e2e2;
+  background: #fff;
+}
+
+.inputContainer input {
+  display: none;
+  border: solid 30px black;
+}
+
+.inputContainer span {
+  color: #1db2ff;
+  cursor: pointer;
+}
+
+.files {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  gap: 10px;
+   & .file {
+    width: 130px;
+    height: 46px;
+    border: solid 1px #E2E2E2;
+    text-align: left;
+    padding-left: 10px;
+    font-size: 16px;
+    border-radius: 10px;
+    position: relative;
+    display: flex;
+    align-items: center;
+
+  }
+}
+
+.file span{
+letter-spacing: 1px;
+text-transform: capitalize;
+}
+
+ .files .closeIcon {
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+
+}

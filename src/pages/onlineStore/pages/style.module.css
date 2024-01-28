@@ -1,0 +1,65 @@
+.action {
+  display: flex !important;
+  align-items: center;
+  justify-content: center !important;
+  gap: 30px;
+  /* width: 180px; */
+  margin: auto;
+  padding: 20px 0px !important;
+}
+.action button {
+  width: 24px;
+  height: 24px;
+  border: none;
+  background: transparent;
+}
+
+/*  ///////////////////////////////////////////////////////////////////////*/
+/* sub title */
+
+.subTitle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+ margin-bottom: 10px;
+  padding: 10px 0px;
+}
+
+.subTitleInput {
+  width: 470px;
+  height: 50px;
+  position: relative;
+}
+.subTitleInput input {
+  width: 100%;
+  height: 100%;
+  border: none;
+  outline: none;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  color: #333;
+  padding-left: 40px;
+}
+
+.subTitleIcon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.subTitle button {
+  border-radius: 10px;
+  background: #1db2ff;
+  width: 170px;
+  height: 50px;
+  padding: 12px 30px;
+  color: #fff;
+  border:none;
+  cursor:pointer;
+
+}

@@ -1,0 +1,67 @@
+/* overlay styling  */
+
+.overLayContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+
+  & .overLayContent {
+    position: absolute;
+    display: flex;
+    width: 500px;
+    height: max-content;
+    padding: 20px 20px;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 5px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 0px 15px rgb(4, 189, 250);
+    & .containerBtn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 30px;
+      width: 100%;
+      padding: 10px 20px;
+
+      & .btn {
+        border-radius: 10px;
+        border: 1px solid #1db2ff;
+        width: 131px;
+        height: 40px;
+        padding: 12px 20px;
+        background-color: #fff;
+        transition: all 0.3s ease-in-out;
+
+      }
+      & .btn:hover {
+        color: rgb(255, 255, 255);
+        background: #1db2ff;
+
+
+      }
+    }
+  }
+}
+
+.overLayClose {
+  position: absolute;
+  right: -10px;
+  top: -10px;
+  background: #f63e3ee5;
+  height: 24px;
+  width: 24px;
+  border-radius: 50%;
+  font-size: 30px !important;
+  color: white !important;
+  cursor: pointer;
+}

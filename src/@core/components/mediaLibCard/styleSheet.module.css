@@ -1,0 +1,14 @@
+
+.CardContent {
+  display: flex;
+  justify-content: center;
+  padding: 15px  20px !important;
+  gap:10px;
+}
+
+.cardCheck {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+
+}

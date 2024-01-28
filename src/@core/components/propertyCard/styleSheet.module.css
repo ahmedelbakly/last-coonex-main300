@@ -1,0 +1,77 @@
+.cardContainer {
+  width:100%;
+  height: 420px;
+  border-radius: 10px;
+  position: relative;
+
+  & .imgCon {
+    width: 100%;
+    height: 45%;
+  }
+  & .imgCon img {
+    width: 100%;
+    height: 100%;
+  }
+
+  & .contentCon {
+    width: 100%;
+    padding: 4%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+    row-gap: 8px;
+  }
+
+}
+
+.list {
+  font-size: 25px;
+  color: #199956;
+}
+
+.contentCon h3 {
+  color: #3d3d3d;
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: capitalize;
+  padding: 0;
+}
+
+.description {
+  color: #8898aa;
+  font-weight: 400;
+  padding-bottom: 10px;
+}
+
+.numData {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.numData p:first-child {
+  color: #3d3d3d;
+  font-size: 14px;
+  font-weight: 400;
+  text-transform: capitalize;
+}
+.numData p:nth-child(2) {
+  color: #3d3d3d;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.cardContainer .deleteCheck {
+  position: absolute !important;
+  top: 10 !important;
+  left: 10 !important;
+}
+
+.titleAndList {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}

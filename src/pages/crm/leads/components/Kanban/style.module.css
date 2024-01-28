@@ -1,0 +1,44 @@
+.kanbanContainer {
+  display: flex;
+  gap: 20px;
+  justify-content: flex-start;
+  width: 100%;
+
+  & .item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 20px;
+    width: 100%;
+
+
+
+
+    & .itemTitle {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      & .itemTitleText {
+        font-size: 16px;
+        font-weight: 500;
+      }
+      & .itemTitleCount {
+        font-size: 16px;
+        font-weight: 500;
+
+      }
+    }
+  }
+  & .item1 {
+
+    & .itemTitleText {
+      color: #967A18;
+    }
+    & .itemTitleCount {
+      color: #967A18;
+    }
+  }
+}

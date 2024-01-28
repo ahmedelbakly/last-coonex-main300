@@ -1,0 +1,64 @@
+.radioContainer {
+  display: flex !important;
+  align-items: flex-start;
+  justify-content: flex-start !important;
+  width: 100%;
+  margin-bottom: 20px;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.container {
+  padding: 10px 20px;
+  background-color: white;
+  border-radius: 10px;
+  border: 1px solid #e2e2e2;
+}
+/*  ///////////////////////////////////////////////////////////////////////*/
+/* sub title */
+
+.subTitle {
+  display: flex !important;
+  align-items: center;
+  justify-content: space-between;
+  margin: 10px 0px;
+  padding: 20px;
+}
+
+.subTitleInput {
+  width: 470px;
+  height: 40px;
+
+}
+.subTitleInput input {
+  width: 100%;
+  height: 100%;
+  border: none;
+  outline: none;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  color: #333;
+  padding-left: 40px;
+}
+
+.subTitleIcon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.subTitle button {
+  border-radius: 10px;
+  background: #1db2ff;
+  width: 170px;
+  height: 40px;
+  padding: 12px 30px;
+  color: #fff;
+  border:none;
+  cursor:pointer;
+
+}

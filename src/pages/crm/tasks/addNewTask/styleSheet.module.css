@@ -1,0 +1,150 @@
+.container {
+  width: 100%;
+  position: relative;
+  & .addImage {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100px;
+    border: 1px solid #e2e2e2;
+    border-radius: 10px;
+    & .fileInput {
+      width: 100%;
+      display: none;
+    }
+  }
+}
+
+.title {
+  margin-bottom: 15px;
+
+  font-size: 16px;
+  font-weight: bold;
+}
+.radioContainer {
+  display: flex !important;
+  align-items: flex-start;
+  flex-direction: row;
+  width: 100%;
+  margin-bottom: 0px;
+  gap: 20px;
+}
+
+.nextAndPrev {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 20px;
+}
+
+.nextAndPrev button {
+  border-radius: 10px;
+  border: 2px solid #1db2ff !important;
+  width: 101px;
+
+  padding: 10px 20px;
+  color: black;
+  border: none;
+  cursor: pointer;
+  background: white;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.3s ease-in-out;
+}
+
+.nextAndPrev button:hover {
+  color: rgb(255, 255, 255);
+  background: #1db2ff;
+}
+.nextAndPrev .hideBtn {
+  visibility: hidden;
+}
+
+.optionStyle {
+  background-color: #e9a105 !important;
+  font-size: 16px;
+  margin: 10px;
+}
+
+.uploadAndLabel {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 5px;
+  width: 100%;
+
+  & .mainLabel {
+    font-size: 14px;
+    font-weight: 600;
+    color: #3d3d3d;
+  }
+
+  .fileAndUploadBtn {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    width: 100%;
+
+    & .uploadFile {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #fff;
+      height: 45px;
+      padding: 12px 20px;
+      border-radius: 10px;
+      border: 1px solid #1db2ff;
+      cursor: pointer;
+      color: #1db2ff;
+      font-size: 16px;
+      font-weight: 600;
+
+      & .input {
+        display: none;
+      }
+    }
+
+    & .label {
+      font-size: 14px;
+      font-weight: 600;
+      color: #3d3d3d;
+    }
+
+    & .files {
+      flex-grow: 1;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 15px;
+
+      & .file {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px !important;
+        height: 45px;
+        border-radius: 5px;
+        background: #f7f5f5;
+        border: 1px solid #e2e2e2;
+        padding: 5px;
+        gap: 10px;
+        width: 100%;
+        position: relative;
+        & .removeSheet {
+          position: absolute;
+          top: -7px;
+          right: -7px;
+          cursor: pointer;
+          background-color: #fff;
+          border-radius: 50%;
+          height: 15px;
+          width: 15px;
+        }
+      }
+    }
+  }
+}

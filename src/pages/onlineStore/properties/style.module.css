@@ -1,0 +1,83 @@
+.container {
+  padding: 10px 20px;
+  background-color: white;
+  border-radius: 10px;
+  border: 1px solid #e2e2e2;
+  padding-bottom: 20px;
+}
+
+/* sub title */
+
+.subTitle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 20px;
+}
+
+.subTitleInput {
+  width: 470px;
+  height: 40px;
+  position: relative;
+}
+
+.subTitleInput input {
+  width: 100%;
+  height: 100%;
+  border: none;
+  outline: none;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  color: #333;
+  padding-left: 40px;
+}
+.subTitleInput input::placeholder {
+  color: #ccc;
+  font-size: 16px;
+  font-weight: 400;
+
+}
+.subTitleIcon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.subTitle .addBtn {
+  border-radius: 10px;
+  background: #1db2ff;
+  width: 180px;
+  height: 40px;
+  padding: 12px 20px;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+
+}
+
+.subTitle .delBtn {
+  border-radius: 10px;
+  background: #ffffff;
+  width: 170px;
+  height: 40px;
+  padding: 12px 20px;
+  border: 1px solid #CF2222 !important;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+
+}
+
+
+
+.countAndSelect {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

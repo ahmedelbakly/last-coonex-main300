@@ -1,0 +1,50 @@
+
+
+.overlayItem{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: black;
+  opacity: 0;
+  z-index: 1;
+  transition: all 0.3s ease-in-out;
+}
+ .overLay:hover {
+    opacity: 0.8;
+  }
+  .containerBtn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    row-gap:10px;
+
+    .containerBtn  button {
+      width: 178px;
+      height: 40px;
+      padding: 12px 20px;
+      border-radius: 10px;
+      font-size: 14px;
+      color:white;
+      background:transparent;
+      border: none;
+     .containerBtn  button:hover {
+      background: #1db2ff;
+      opacity: 1 !important;
+     }
+    }
+  }
+
+  @media only screen and (max-width:712px){
+   .overLay {
+    width:320px !important
+   }
+  }
+
