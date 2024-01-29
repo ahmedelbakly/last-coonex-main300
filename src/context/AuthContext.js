@@ -90,8 +90,8 @@ const AuthProvider = ({ children }) => {
 
   const handleLogin = (params, errorCallback) => {
     axios
-      //.post(authConfig.loginEndpoint, params)
-      .post("https://isn-technology.com/test.php", params)
+      .post(authConfig.loginEndpoint, params)
+
       .then(async (response) => {
         console.log("====================================");
         console.log(response.data);
