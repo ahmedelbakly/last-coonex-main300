@@ -90,8 +90,8 @@ const saleIcon = (
 );
 const HomePage = () => {
 
-  const auth = useAuth()
- auth.setPages("Dashboard")
+  const {setPages,user} = useAuth()
+ setPages("Dashboard")
 
  console.log(process.env.NODE_ENV);
 
@@ -119,7 +119,7 @@ const HomePage = () => {
             fontWeight={600}
             color={"black"}
           >
-            Welcome back Omar Elbakly{" "}
+            <h3 className={styleSheet.welcome}>{`Welcome back ${user.firstname} ${user.lastname}` }</h3>
           </Typography>
           <button>
             <CiCalendar fontSize={30} />
