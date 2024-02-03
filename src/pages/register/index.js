@@ -3,6 +3,7 @@ import { useState } from "react";
 import axios from "axios";
 // ** Next Import
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 import { FaUserGroup } from "react-icons/fa6";
 
@@ -81,11 +82,12 @@ const Register = () => {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [showPersonal, setShowPersonal] = useState(false);
   const [notFull, setNotFull] = useState([]);
-
+  const [showErorr, setShowErorr] = useState(false);
   // ** Hooks
   const theme = useTheme();
   const { settings } = useSettings();
   const hidden = useMediaQuery(theme.breakpoints.down("md"));
+  const router = useRouter();
 
   // ** Vars
   const { skin } = settings;
@@ -135,54 +137,38 @@ const Register = () => {
       [name]: value,
     }));
   };
+
+  // check is empty
+  const checkIsEmpty = (item) => {
+    if (item === "") {
+      setNotFull((prev) => [...prev, "item"]);
+      return true;
+    } else {
+      setNotFull((prev) =>{return notFull.unshift()});
+      return false;
+    }
+  };
+
   // handle api route
-  const api = "http://localhost:3005/register/";
+  const api = "http://195.35.2.218:81/api/do-register";
   // handle submit function
 
   //** filter register data */
-  const handleRegister = (obj) => {
-    Object.keys(obj).forEach((key) => {
-      if (obj[key] === "") {
-        setNotFull((prev) => {
-          return [...prev, key];
-        });
-
-        return delete obj[key];
-      }
-    });
-  };
 
   const handleSubmit = async (e) => {
-    e.preventDefault(); 
+    e.preventDefault();
+    setShowErorr(true);
+    axios.post(api, registerData).then((response) => {
+      console.log(response.data);
+      if (response.data.status === "success register") {
+        console.log("success register");
+        router.push("/login");
+      }
+    });
 
     return console.log(registerData);
-    // try {
-    //   handleRegister(registerData);
-    //   console.log(notFull);
-    //   if (registerData.firstName&&registerData.lastName&& registerData.password
-    //     && registerData.email
-    //     && registerData.domain
-    //     && registerData.conditionAgree
-    //     && registerData.confirmPassword
-
-    //     && registerData.jobTitle
-    //     && registerData.city
-    //     && registerData.phoneNumber
-
-    //     ) {
-    //     axios.post(api, registerData).then((response) => {
-    //       console.log(response.data);
-    //       if (response.data.status === "success") {
-    //         console.log("");
-    //       }
-    //     });
-    //   }
-    // } catch (error) {
-    //   console.log(error);
-    // }
   };
   ////////////////////////////////////////////////////////////////////////////////////////////////////
-  console.log(notFull);
 
   return (
     <Box className="content-right" sx={{ backgroundColor: "background.paper" }}>
@@ -334,6 +320,9 @@ const Register = () => {
                     onChange={(e) => handleChange(e)}
                     value={registerData.firstName}
                   />
+                  {showErorr && checkIsEmpty(registerData.firstName)
+                    ? "required"
+                    : ""}
                   <CustomTextField
                     name="lastName"
                     fullWidth
@@ -420,7 +409,11 @@ const Register = () => {
                     fullWidth
                     variant="contained"
                     sx={{ mb: 4 }}
-                    onClick={() => setShowPersonal(!showPersonal)}
+                    onClick={() => {
+                      setShowErorr(true);
+
+                      notFull.length === 0 && setShowPersonal(!showPersonal);
+                    }}
                   >
                     Next
                   </Button>
@@ -428,25 +421,7 @@ const Register = () => {
               ) : (
                 <Box>
                   {/* Personal Information */}
-                  <div>
-                    {" "}
-                    {notFull.map((key, index) => (
-                      <span
-                        style={{
-                          color: "red",
-                          fontSize: "14px",
-                          textTransform: "capitalize",
-                        }}
-                        key={index}
-                      >
-                        {" "}
-                        {key}-
-                      </span>
-                    ))}{" "}
-                    <span style={{ color: "#1DB2FF", fontSize: "16px" }}>
-                      is required
-                    </span>
-                  </div>
+                  <div></div>
                   <CustomTextField
                     name="phoneNumber"
                     autoFocus
