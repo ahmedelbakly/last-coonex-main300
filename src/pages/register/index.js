@@ -34,7 +34,11 @@ import { useSettings } from "src/@core/hooks/useSettings";
 
 // ** Demo Imports
 import FooterIllustrationsV2 from "src/views/pages/auth/FooterIllustrationsV2";
-import { InputLayout } from "src/properties/shared-components/input-layout";
+import * as yup from 'yup'
+import { useForm, Controller } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
+
+
 
 // ** Styled Components
 const RegisterIllustration = styled("img")(({ theme }) => ({
@@ -75,6 +79,18 @@ const FormControlLabel = styled(MuiFormControlLabel)(({ theme }) => ({
     color: theme.palette.text.secondary,
   },
 }));
+
+// use form validation
+const schema = yup.object().shape({
+  email: yup.string().email().required(),
+  password: yup.string().min(5).required()
+})
+
+const defaultValues = {
+  password: '',
+  email: ''
+}
+
 
 const Register = () => {
   // ** States
@@ -340,6 +356,7 @@ const Register = () => {
                     placeholder="add your email"
                     onChange={(e) => handleChange(e)}
                     value={registerData.email}
+                    type="email"
                   />
                   <CustomTextField
                     fullWidth
