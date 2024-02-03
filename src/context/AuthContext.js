@@ -9,7 +9,7 @@ import axios from "axios";
 
 // ** Config
 import authConfig from "src/configs/auth";
-import { Pages } from "@mui/icons-material";
+
 
 
 // ** Defaults
