@@ -34,11 +34,9 @@ import { useSettings } from "src/@core/hooks/useSettings";
 
 // ** Demo Imports
 import FooterIllustrationsV2 from "src/views/pages/auth/FooterIllustrationsV2";
-import * as yup from 'yup'
-import { useForm, Controller } from 'react-hook-form'
-import { yupResolver } from '@hookform/resolvers/yup'
-
-
+import * as yup from "yup";
+import { useForm, Controller } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 // ** Styled Components
 const RegisterIllustration = styled("img")(({ theme }) => ({
@@ -82,15 +80,41 @@ const FormControlLabel = styled(MuiFormControlLabel)(({ theme }) => ({
 
 // use form validation
 const schema = yup.object().shape({
-  email: yup.string().email().required(),
-  password: yup.string().min(5).required()
-})
+  firstName: yup.string().required(),
+  // lastName: yup.string().required(),
+  // email: yup.string().email().required(),
+  // password: yup.string().min(8).required(),
+  // confirmPassword: yup.string()
+  //   .label("confirm password")
+  //   .required()
+  //   .oneOf([yup.ref("password"), null], "Passwords must match"),
+  // domain: yup.string(),
+  // jobTitle: yup.string().required(),
+  // phoneNumber: yup.number().required(),
+  // conditionAgree: yup.boolean().oneOf([true]),
+  // role: yup.string().required(),
+  // city: yup.string(),
+});
+
+/* 
+// conditionAgree: yup.boolean().oneOf([true]),
+  //role: yup.string().required(),
+  // city: yup.string(),
+  
+*/
 
 const defaultValues = {
-  password: '',
-  email: ''
-}
-
+  firstName: "",
+  lastName: "",
+  email: "",
+  password: "",
+  domain: "",
+  conditionAgree: false,
+  confirmPassword: null,
+  phoneNumber: null,
+  city: "aga",
+  jobTitle: "",
+};
 
 const Register = () => {
   // ** States
@@ -112,79 +136,56 @@ const Register = () => {
       ? "auth-v2-register-illustration-bordered"
       : "auth-v2-register-illustration";
   ////////////////////////////////////////////////////////////////////////////////////////////////////
-  // handle register operation
-  // register state data
-  const [registerData, setRegisterData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    password: "",
-    domain: "",
-    conditionAgree: "",
-    confirmPassword: "",
-    phoneNumber: "",
-    city: "",
-    jobTitle: "",
-    role: "admin",
+  //** start  handle useForm */
+
+  const {
+    control,
+    setError,
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    defaultValues,
+    mode: "onBlur",
+    resolver: yupResolver(schema),
   });
 
-  // handle change function
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setRegisterData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+  //** end handle useForm    */
+
+  //* handle on submit   /*/
+  const api = "http://195.35.2.218:81/api/do-register";
+  const onSubmit = (data) => {
+    // console.log(data);
+    // setError("phoneNumber", {
+    //   type: "manual",
+    //   message: `${data.phoneNumber}`,
+    // });
+    // try {
+    //   axios.post(api, data).then((response) => {
+    //     console.log(response.data);
+    //     if (response.data.status === "success register") {
+    //       console.log("success register");
+    //       router.push("/login");
+    //     }
+    //   });
+    // } catch (error) {
+    //   setError("phoneNumber", {
+    //     type: "manual",
+    //     message: `${error.response.data.message}`,
+    //   });
+    // }
+    console.log(data);
   };
+
   // handle checkbox
-  const handleCheckbox = (e) => {
-    const { name, checked } = e.target;
-    setRegisterData((prevData) => ({
-      ...prevData,
-      [name]: checked,
-    }));
-  };
 
   // handle select
-  const handleSelect = (e) => {
-    const { name, value } = e.target;
-    setRegisterData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
-
-  // check is empty
-  const checkIsEmpty = (item) => {
-    if (item === "") {
-      setNotFull((prev) => [...prev, "item"]);
-      return true;
-    } else {
-      setNotFull((prev) =>{return notFull.unshift()});
-      return false;
-    }
-  };
 
   // handle api route
-  const api = "http://195.35.2.218:81/api/do-register";
+
   // handle submit function
 
   //** filter register data */
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setShowErorr(true);
-    axios.post(api, registerData).then((response) => {
-      console.log(response.data);
-      if (response.data.status === "success register") {
-        console.log("success register");
-        router.push("/login");
-      }
-    });
-
-    return console.log(registerData);
-  };
-  ////////////////////////////////////////////////////////////////////////////////////////////////////
 
   return (
     <Box className="content-right" sx={{ backgroundColor: "background.paper" }}>
@@ -323,104 +324,164 @@ const Register = () => {
                 </span>
               </Typography>
             </Box>
-            <div noValidate autoComplete="off" onSubmit={handleSubmit}>
+            <form autoComplete="off" onSubmit={handleSubmit(onSubmit)}>
               {!showPersonal ? (
                 <Box>
-                  <CustomTextField
-                    name="firstName"
-                    autoFocus
-                    fullWidth
-                    sx={{ mb: 4 }}
-                    label="First Name"
-                    placeholder="add your first name"
-                    onChange={(e) => handleChange(e)}
-                    value={registerData.firstName}
-                  />
-                  {showErorr && checkIsEmpty(registerData.firstName)
-                    ? "required"
-                    : ""}
-                  <CustomTextField
-                    name="lastName"
-                    fullWidth
-                    sx={{ mb: 4 }}
-                    label="Last Name"
-                    placeholder="add your last name"
-                    onChange={(e) => handleChange(e)}
-                    value={registerData.lastName}
-                  />
-                  <CustomTextField
-                    fullWidth
-                    name="email"
-                    label="Email"
-                    sx={{ mb: 4 }}
-                    placeholder="add your email"
-                    onChange={(e) => handleChange(e)}
-                    value={registerData.email}
-                    type="email"
-                  />
-                  <CustomTextField
-                    fullWidth
-                    sx={{ mb: 4 }}
-                    name="password"
-                    label="Password"
-                    placeholder="add your password"
-                    onChange={(e) => handleChange(e)}
-                    value={registerData.password}
-                    id="auth-login-v2-password"
-                    type={showPassword ? "text" : "password"}
-                    InputProps={{
-                      endAdornment: (
-                        <InputAdornment position="end">
-                          <IconButton
-                            edge="end"
-                            onMouseDown={(e) => e.preventDefault()}
-                            onClick={() => setShowPassword(!showPassword)}
-                          >
-                            <Icon
-                              fontSize="1.25rem"
-                              icon={
-                                showPassword ? "tabler:eye" : "tabler:eye-off"
-                              }
-                            />
-                          </IconButton>
-                        </InputAdornment>
-                      ),
-                    }}
-                  />
-                  <CustomTextField
-                    fullWidth
-                    sx={{ mb: 4 }}
-                    name="confirmPassword"
-                    label="Confirm Password"
-                    placeholder="add your password"
-                    onChange={(e) => handleChange(e)}
-                    value={registerData.confirmPassword}
-                    id="auth-login-v2-password"
-                    type={showConfirmPassword ? "text" : "password"}
-                    InputProps={{
-                      endAdornment: (
-                        <InputAdornment position="end">
-                          <IconButton
-                            edge="end"
-                            onMouseDown={(e) => e.preventDefault()}
-                            onClick={() =>
-                              setShowConfirmPassword(!showConfirmPassword)
-                            }
-                          >
-                            <Icon
-                              fontSize="1.25rem"
-                              icon={
-                                showConfirmPassword
-                                  ? "tabler:eye"
-                                  : "tabler:eye-off"
-                              }
-                            />
-                          </IconButton>
-                        </InputAdornment>
-                      ),
-                    }}
-                  />
+                  <Box sx={{ mb: 4 }}>
+                    <Controller
+                      name="firstName"
+                      control={control}
+                      rules={{ required: false }}
+                      render={({ field: { value, onChange, onBlur } }) => (
+                        <CustomTextField
+                          fullWidth
+                          autoFocus
+                          label="First Name"
+                          value={value}
+                          onBlur={onBlur}
+                          onChange={onChange}
+                          placeholder="first name"
+                          error={Boolean(errors.firstName)}
+                          {...(errors.firstName && {
+                            helperText: errors.firstName.message,
+                          })}
+                        />
+                      )}
+                    />
+                  </Box>
 
+                  <Box sx={{ mb: 4 }}>
+                    <Controller
+                      name="lastName"
+                      control={control}
+                      rules={{ required: true }}
+                      render={({ field: { value, onChange, onBlur } }) => (
+                        <CustomTextField
+                          fullWidth
+                          autoFocus
+                          label="Last Name"
+                          value={value}
+                          onBlur={onBlur}
+                          onChange={onChange}
+                          placeholder="LastName"
+                          error={Boolean(errors.lastName)}
+                          {...(errors.lastName && {
+                            helperText: errors.lastName.message,
+                          })}
+                        />
+                      )}
+                    />
+                  </Box>
+                  <Box sx={{ mb: 4 }}>
+                    <Controller
+                      name="email"
+                      control={control}
+                      rules={{ required: true }}
+                      render={({ field: { value, onChange, onBlur } }) => (
+                        <CustomTextField
+                          fullWidth
+                          autoFocus
+                          label="Email"
+                          value={value}
+                          onBlur={onBlur}
+                          onChange={onChange}
+                          placeholder="add your email"
+                          error={Boolean(errors.email)}
+                          {...(errors.email && {
+                            helperText: errors.email.message,
+                          })}
+                        />
+                      )}
+                    />
+                  </Box>
+                  <Box sx={{ mb: 1.5 }}>
+                    <Controller
+                      name="password"
+                      control={control}
+                      rules={{ required: true }}
+                      render={({ field: { value, onChange, onBlur } }) => (
+                        <CustomTextField
+                          fullWidth
+                          value={value}
+                          onBlur={onBlur}
+                          label="Password"
+                          onChange={onChange}
+                          id="auth-login-v2-password"
+                          placeholder="add your password"
+                          error={Boolean(errors.password)}
+                          {...(errors.password && {
+                            helperText: errors.password.message,
+                          })}
+                          type={showPassword ? "text" : "password"}
+                          InputProps={{
+                            endAdornment: (
+                              <InputAdornment position="end">
+                                <IconButton
+                                  edge="end"
+                                  onMouseDown={(e) => e.preventDefault()}
+                                  onClick={() => setShowPassword(!showPassword)}
+                                >
+                                  <Icon
+                                    fontSize="1.25rem"
+                                    icon={
+                                      showPassword
+                                        ? "tabler:eye"
+                                        : "tabler:eye-off"
+                                    }
+                                  />
+                                </IconButton>
+                              </InputAdornment>
+                            ),
+                          }}
+                        />
+                      )}
+                    />
+                  </Box>
+                  <Box sx={{ mb: 1.5 }}>
+                    <Controller
+                      name="confirmPassword"
+                      control={control}
+                      rules={{ required: true }}
+                      render={({ field: { value, onChange, onBlur } }) => (
+                        <CustomTextField
+                          fullWidth
+                          value={value}
+                          onBlur={onBlur}
+                          label="Confirm Password"
+                          onChange={onChange}
+                          id="auth-login-v3-password"
+                          placeholder="confirm password"
+                          error={Boolean(errors.confirmPassword)}
+                          {...(errors.confirmPassword && {
+                            helperText: errors.confirmPassword.message,
+                          })}
+                          type={showConfirmPassword ? "text" : "password"}
+                          InputProps={{
+                            endAdornment: (
+                              <InputAdornment position="end">
+                                <IconButton
+                                  edge="end"
+                                  onMouseDown={(e) => e.preventDefault()}
+                                  onClick={() =>
+                                    setShowConfirmPassword(!showConfirmPassword)
+                                  }
+                                >
+                                  <Icon
+                                    fontSize="1.25rem"
+                                    icon={
+                                      showConfirmPassword
+                                        ? "tabler:eye"
+                                        : "tabler:eye-off"
+                                    }
+                                  />
+                                </IconButton>
+                              </InputAdornment>
+                            ),
+                          }}
+                        />
+                      )}
+                    />
+                  </Box>
                   <Button
                     type=""
                     fullWidth
@@ -439,52 +500,86 @@ const Register = () => {
                 <Box>
                   {/* Personal Information */}
                   <div></div>
-                  <CustomTextField
-                    name="phoneNumber"
-                    autoFocus
-                    fullWidth
-                    sx={{ mb: 4 }}
-                    label="Phone Number"
-                    placeholder="add Phone Number"
-                    onChange={(e) => handleChange(e)}
-                    value={registerData.phoneNumber}
-                  />
+                  <Box sx={{ mb: 4 }}>
+                    <Controller
+                      name="phoneNumber"
+                      control={control}
+                      rules={{ required: false }}
+                      render={({ field: { value, onChange, onBlur } }) => (
+                        <CustomTextField
+                          type="number"
+                          fullWidth
+                          autoFocus
+                          label="phone Number"
+                          value={value}
+                          onBlur={onBlur}
+                          onChange={onChange}
+                          placeholder="Phone Number"
+                          error={Boolean(errors.phoneNumber)}
+                          {...(errors.phoneNumber && {
+                            helperText: errors.phoneNumber.message,
+                          })}
+                        />
+                      )}
+                    />
+                  </Box>
                   <div className={styles.containerInput}>
                     <label>City</label>
-                    <select
-                      name="city"
-                      id="city"
-                      value={registerData.city}
-                      onChange={(e) => handleSelect(e)}
-                    >
+                    <select {...register("city")}>
+                      <option value="">select city</option>
                       <option value="cairo">Cairo</option>
                       <option value="alex">Alex</option>
                       <option value="mekka">Mekka</option>
                     </select>
                   </div>
-                  <CustomTextField
-                    fullWidth
-                    name="jobTitle"
-                    label="Job Title"
-                    sx={{ mb: 4 }}
-                    placeholder="add Job Title"
-                    onChange={(e) => handleChange(e)}
-                    value={registerData.jobTitle}
-                  />
+                  <Box sx={{ mb: 4 }}>
+                    <Controller
+                      name="jobTitle"
+                      control={control}
+                      rules={{ required: false }}
+                      render={({ field: { value, onChange, onBlur } }) => (
+                        <CustomTextField
+                          fullWidth
+                          autoFocus
+                          label="Job Title"
+                          value={value}
+                          onBlur={onBlur}
+                          onChange={onChange}
+                          placeholder="job title"
+                          error={Boolean(errors.jobTitle)}
+                          {...(errors.jobTitle && {
+                            helperText: errors.jobTitle.message,
+                          })}
+                        />
+                      )}
+                    />
+                  </Box>
 
-                  <CustomTextField
-                    fullWidth
-                    name="domain"
-                    label="Domain"
-                    sx={{ mb: 4 }}
-                    placeholder="add Job Domain"
-                    onChange={(e) => handleChange(e)}
-                    value={registerData.domain}
-                  />
+                  <Box sx={{ mb: 4 }}>
+                    <Controller
+                      name="domain"
+                      control={control}
+                      rules={{ required: false }}
+                      render={({ field: { value, onChange, onBlur } }) => (
+                        <CustomTextField
+                          fullWidth
+                          autoFocus
+                          label="Domain Name"
+                          value={value}
+                          onBlur={onBlur}
+                          onChange={onChange}
+                          placeholder="domain"
+                          error={Boolean(errors.domain)}
+                          {...(errors.domain && {
+                            helperText: errors.domain.message,
+                          })}
+                        />
+                      )}
+                    />
+                  </Box>
 
                   <FormControlLabel
                     control={<Checkbox />}
-                    onChange={(e) => handleCheckbox(e)}
                     name="conditionAgree"
                     sx={{
                       mb: 4,
@@ -522,7 +617,6 @@ const Register = () => {
                     type="submit"
                     variant="contained"
                     sx={{ mb: 4 }}
-                    onClick={handleSubmit}
                   >
                     Register
                   </Button>
@@ -597,7 +691,7 @@ const Register = () => {
                   <Icon icon="mdi:google" />
                 </IconButton>
               </Box>
-            </div>
+            </form>
           </Box>
         </Box>
       </RightWrapper>
