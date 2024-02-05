@@ -10,8 +10,6 @@ import axios from "axios";
 // ** Config
 import authConfig from "src/configs/auth";
 
-
-
 // ** Defaults
 const defaultProvider = {
   user: null,
@@ -28,11 +26,10 @@ const defaultProvider = {
   logout: () => Promise.resolve(),
   setLeadId: () => Promise.resolve(),
   leadId: null,
-  leadsId:null,
+  leadsId: null,
   setLeadsId: () => Promise.resolve(),
   taskId: null,
   setTaskId: () => Promise.resolve(),
-
 };
 const AuthContext = createContext(defaultProvider);
 
@@ -46,52 +43,99 @@ const AuthProvider = ({ children }) => {
   const [leadId, setLeadId] = useState(defaultProvider.leadId);
   const [taskId, setTaskId] = useState(defaultProvider.taskId);
 
-
-
   // ** Hooks
   const router = useRouter();
+  // useEffect(() => {
+  //   const initAuth = async () => {
+  //     const storedToken = window.localStorage.getItem(
+  //       authConfig.storageTokenKeyName
+  //     );
+  //     if (storedToken) {
+  //       setLoading(true);
+  //       await axios
+  //         .get(authConfig.meEndpoint, {
+  //           headers: {
+  //             Authorization: storedToken,
+  //           },
+  //         })
+  //         .then(async (response) => {
+  //           setLoading(false);
+  //           setUser({ ...response.data.userData });
+  //         })
+  //         .catch(() => {
+  //           localStorage.removeItem("userData");
+  //           localStorage.removeItem("refreshToken");
+  //           localStorage.removeItem("accessToken");
+  //           setUser(null);
+  //           setLoading(false);
+  //           if (
+  //             authConfig.onTokenExpiration === "logout" &&
+  //             !router.pathname.includes("login")
+  //           ) {
+  //             router.replace("/login");
+  //           }
+  //         });
+  //     } else {
+  //       setLoading(false);
+  //     }
+  //   };
+  //   initAuth();
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
+
+  //*start  handle get user data after login  */
   useEffect(() => {
     const initAuth = async () => {
-      const storedToken = window.localStorage.getItem(
-        authConfig.storageTokenKeyName
-      );
-      if (storedToken) {
+      const user = JSON.parse(localStorage.getItem("userData"));
+      if (
+        authConfig.onTokenExpiration === "logout" ||
+        !router.pathname.includes("login")
+      ) {
+        router.replace("/login");
+      }
+      if (user) {
+        console.log(user);
+
         setLoading(true);
-        await axios
-          .get(authConfig.meEndpoint, {
-            headers: {
-              Authorization: storedToken,
-            },
-          })
-          .then(async (response) => {
-            setLoading(false);
-            setUser({ ...response.data.userData });
-          })
-          .catch(() => {
-            localStorage.removeItem("userData");
-            localStorage.removeItem("refreshToken");
-            localStorage.removeItem("accessToken");
-            setUser(null);
-            setLoading(false);
-            if (
-              authConfig.onTokenExpiration === "logout" &&
-              !router.pathname.includes("login")
-            ) {
-              router.replace("/login");
-            }
-          });
-      } else {
+        setUser(user);
+        setLoading(false);
+        // await axios
+        //   .get(`http://195.35.2.218:81/api/get-user/${user.id}`)
+        //   .then(async (response) => {
+        //     setLoading(false);
+        //     console.log(response.data);
+        //     setUser({ ...response.data.userData });
+        //     localStorage.setItem(
+        //       "userData",
+        //       JSON.stringify(response.data.userData)
+        //     );
+        //   })
+        //   .catch(() => {
+        //     localStorage.removeItem("userData");
+        //     localStorage.removeItem("refreshToken");
+        //     localStorage.removeItem("accessToken");
+        //     setUser(null);
+        //     setLoading(false);
+        //     if (
+        //       authConfig.onTokenExpiration === "logout" &&
+        //       !router.pathname.includes("login")
+        //     ) {
+        //       router.replace("/login");
+        //     }
+        //   });
+      }else{
         setLoading(false);
       }
     };
     initAuth();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  //*End  handle get user data after login  */
 
   const handleLogin = (params, errorCallback) => {
     axios
       //.post(authConfig.loginEndpoint, params)
-.post("http://195.35.2.218:81/api/do-login", params)
+      .post("http://195.35.2.218:81/api/do-login", params)
       .then(async (response) => {
         console.log("====================================");
         console.log(response.data);
@@ -138,10 +182,10 @@ const AuthProvider = ({ children }) => {
     setPages,
     login: handleLogin,
     logout: handleLogout,
-    setLeadId:setLeadId,
-    leadId:leadId,
-    taskId:taskId,
-    setTaskId:setTaskId,
+    setLeadId: setLeadId,
+    leadId: leadId,
+    taskId: taskId,
+    setTaskId: setTaskId,
   };
 
   return <AuthContext.Provider value={values}>{children}</AuthContext.Provider>;

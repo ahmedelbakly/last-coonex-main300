@@ -6,12 +6,21 @@ import themeTwoImage from "../../../../public/images/cms/themeTwoImage.png";
 import styles from "./style.module.css";
 import Image from "next/image";
 import { useAuth } from "src/hooks/useAuth";
+import { useState } from "react";
+import Link from "next/link";
+import { themesData } from "src/fileData/themes_data";
 
 const StoreThemes = () => {
   const auth = useAuth();
-  auth.setPages("Themes")
+  auth.setPages("Themes");
 
+  //** start handle select theme */
+  const [theme, setTheme] = useState("one");
+  const handleSelectTheme = (themeNumber) => {
+    setTheme(themeNumber);
+  };
 
+  //** start handle select theme */
 
   return (
     <div style={{ width: "100%", padding: "0px 0px" }}>
@@ -34,7 +43,6 @@ const StoreThemes = () => {
           item
           xs={12}
           sx={{ display: "flex", justifyContent: "space-between" }}
-
         >
           <p>Site Speed</p>
           <div className="activate">
@@ -61,19 +69,17 @@ const StoreThemes = () => {
           xs={12}
           sx={{ display: "flex", justifyContent: "space-between" }}
         >
-
-            <div className={styles.speedRate}>
-              <span>0%</span>
-              <div>
-                <h5>0% Speed Score,you don't have enough traffic yet</h5>
-                <h6>
-                  You'll see your site's average loading speed once you have
-                  more traffic
-                </h6>
-              </div>
+          <div className={styles.speedRate}>
+            <span>0%</span>
+            <div>
+              <h5>0% Speed Score,you don't have enough traffic yet</h5>
+              <h6>
+                You'll see your site's average loading speed once you have more
+                traffic
+              </h6>
             </div>
-            <p>Learn how to boost your traffic</p>
-
+          </div>
+          <p>Learn how to boost your traffic</p>
         </Grid>
       </Grid>
       <Grid
@@ -88,40 +94,37 @@ const StoreThemes = () => {
           flexWrap: "wrap",
         }}
       >
-        <Grid
+
+        {/* start handle select theme */}
+        {
+          themesData.map(({ id, name, image }, index) =>(
+            <Grid
           item
           xs={12}
           sx={{ display: "flex", justifyContent: "space-between" }}
         >
-          <MediaCard img={themeOneImage} title="Real estate one" />
+          <MediaCard key={id} img={image} title={name} handleSelectTheme={handleSelectTheme}/>
         </Grid>
-        <Grid
-          item
-          xs={12}
-          sx={{ display: "flex", justifyContent: "space-between" }}
-        >
-          <MediaCard img={themeTwoImage} title="Real estate Two" />
-        </Grid>
-        <Grid
-          item
-          xs={12}
-          sx={{ display: "flex", justifyContent: "space-between" }}
-        >
-          <MediaCard img={themeTwoImage} title="Real estate Three" />
-        </Grid>
+          )
+
+
+          )
+        }
+
         <grid item xs={12} className={styles.themeSelected}>
           <grid item xs={12} className={styles.theme}>
             <Image src={themeTwoImage} alt="themeTwoImage" />
-            <p>You Selected Real estate two</p>
+            <p>You Selected Real estate {theme}</p>
           </grid>
           <grid item xs={12} className={styles.theme}>
             <grid item xs={12}>
-              <button>Customize</button>
+              <Link href="https://github.com/ahmedelbakly?tab=repositories">
+                <button className={styles.customizeBtn} >Customize</button>
+              </Link>
             </grid>
           </grid>
         </grid>
       </Grid>
-
     </div>
   );
 };

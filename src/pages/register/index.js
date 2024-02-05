@@ -81,26 +81,26 @@ const FormControlLabel = styled(MuiFormControlLabel)(({ theme }) => ({
 // use form validation
 const schema = yup.object().shape({
   firstName: yup.string().required(),
-  // lastName: yup.string().required(),
-  // email: yup.string().email().required(),
-  // password: yup.string().min(8).required(),
-  // confirmPassword: yup.string()
-  //   .label("confirm password")
-  //   .required()
-  //   .oneOf([yup.ref("password"), null], "Passwords must match"),
-  // domain: yup.string(),
-  // jobTitle: yup.string().required(),
-  // phoneNumber: yup.number().required(),
-  // conditionAgree: yup.boolean().oneOf([true]),
-  // role: yup.string().required(),
-  // city: yup.string(),
+  lastName: yup.string().required(),
+  email: yup.string().email().required(),
+   password: yup.string().min(8).required(),
+   confirmPassword: yup.string()
+  .label("confirm password")
+  .required()
+  .oneOf([yup.ref("password"), null], "Passwords must match"),
+   domain: yup.string().required(),
+   jobTitle: yup.string().required(),
+  phoneNumber: yup.number().required(),
+  conditionAgree: yup.boolean().oneOf([true]),
+   role: yup.string().required(),
+  city: yup.string().required(),
 });
 
-/* 
+/*
 // conditionAgree: yup.boolean().oneOf([true]),
   //role: yup.string().required(),
   // city: yup.string(),
-  
+
 */
 
 const defaultValues = {
@@ -109,11 +109,12 @@ const defaultValues = {
   email: "",
   password: "",
   domain: "",
-  conditionAgree: false,
+  conditionAgree:null,
   confirmPassword: null,
   phoneNumber: null,
-  city: "aga",
+  city: "",
   jobTitle: "",
+  role: "admin",
 };
 
 const Register = () => {
@@ -155,26 +156,23 @@ const Register = () => {
   //* handle on submit   /*/
   const api = "http://195.35.2.218:81/api/do-register";
   const onSubmit = (data) => {
-    // console.log(data);
-    // setError("phoneNumber", {
-    //   type: "manual",
-    //   message: `${data.phoneNumber}`,
-    // });
-    // try {
-    //   axios.post(api, data).then((response) => {
-    //     console.log(response.data);
-    //     if (response.data.status === "success register") {
-    //       console.log("success register");
-    //       router.push("/login");
-    //     }
-    //   });
-    // } catch (error) {
-    //   setError("phoneNumber", {
-    //     type: "manual",
-    //     message: `${error.response.data.message}`,
-    //   });
-    // }
     console.log(data);
+
+    try {
+      axios.post(api, data).then((response) => {
+        console.log(response.data);
+        if (response.data.status === "success register") {
+          console.log("success register");
+          router.push("/login");
+        }
+      });
+    } catch (error) {
+      setError("phoneNumber", {
+        type: "manual",
+        message: `${error.response.data.message}`,
+      });
+    }
+    
   };
 
   // handle checkbox
@@ -580,7 +578,7 @@ const Register = () => {
 
                   <FormControlLabel
                     control={<Checkbox />}
-                    name="conditionAgree"
+                    {...register("conditionAgree")}
                     sx={{
                       mb: 4,
                       mt: 1.5,
