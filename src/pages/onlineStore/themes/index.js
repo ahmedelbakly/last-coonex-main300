@@ -118,7 +118,7 @@ const StoreThemes = () => {
           </grid>
           <grid item xs={12} className={styles.theme}>
             <grid item xs={12}>
-              <Link href="https://github.com/ahmedelbakly?tab=repositories">
+              <Link href="https://ahmedelbakly.surge.sh/">
                 <button className={styles.customizeBtn} >Customize</button>
               </Link>
             </grid>

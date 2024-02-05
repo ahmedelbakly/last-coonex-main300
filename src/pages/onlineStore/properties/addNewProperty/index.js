@@ -1,9 +1,6 @@
 import React from "react";
 import Grid from "@mui/material/Grid";
 import StyleSheet from "./style.module.css";
-import Link from "next/link";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 import { useState } from "react";
 import { mainList, rightIcon } from "../../../../fileData/addBropertyData";
 import BasicInfo from "src/properties/basic-information";
@@ -153,12 +150,7 @@ const AddPropertyPage = () => {
     e.preventDefault();
 
     console.log(allData);
-    setProperty([
-      { id: 1, title: "house", rooms: 2, path: 3 },
-      { id: 2, title: "house", rooms: 2, path: 3 },
-      { id: 3, title: "house", rooms: 2, path: 3 },
-      { id: 4, title: "house", rooms: 2, path: 3 },
-    ]);
+   
 
     try {
       const res = await axios.post(api, allData);
