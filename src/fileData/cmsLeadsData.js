@@ -17,10 +17,10 @@ export const rows = [
   createData(
     1,
     1,
-    "Mohamed Ahmed mohamed elbakly",
+    "Mohamed Ahmed elbakly",
     "123456789",
     "karolinaolszewska@spy.com",
-    "Google  ADS",
+    "facebook",
     "1/1/2023, 8:22 pm"
   ),
   createData(
@@ -29,7 +29,7 @@ export const rows = [
     "Mohamed Ahmed",
     "123456789",
     "karolinaolszewska@spy.com",
-    "Google  ADS",
+    "snapchat",
     "1/1/2023, 8:22 pm"
   ),
   createData(
@@ -38,7 +38,7 @@ export const rows = [
     "Mohamed Ahmed",
     "123456789",
     "karolinaolszewska@spy.com",
-    "Google  ADS",
+    "googleAds",
     "1/1/2023, 8:22 pm"
   ),
   createData(
@@ -47,7 +47,7 @@ export const rows = [
     "Mohamed Ahmed",
     "123456789",
     "karolinaolszewska@spy.com",
-    "Google  ADS",
+    "snapchat",
     "1/1/2023, 8:22 pm"
   ),
   createData(
@@ -56,7 +56,7 @@ export const rows = [
     "Mohamed Ahmed",
     "123456789",
     "karolinaolszewska@spy.com",
-    "Google  ADS",
+    "instagram",
     "1/1/2023, 8:22 pm"
   ),
   createData(
@@ -65,7 +65,7 @@ export const rows = [
     "Mohamed Ahmed",
     "123456789",
     "karolinaolszewska@spy.com",
-    "Google  ADS",
+    "googleAds",
     "1/1/2023, 8:22 pm"
   ),
   createData(
@@ -74,7 +74,7 @@ export const rows = [
     "Mohamed Ahmed",
     "123456789",
     "karolinaolszewska@spy.com",
-    "Google  ADS",
+    "whatsUp",
     "1/1/2023, 8:22 pm"
   ),
   createData(
@@ -83,7 +83,7 @@ export const rows = [
     "Mohamed Ahmed",
     "123456789",
     "karolinaolszewska@spy.com",
-    "Google  ADS",
+    "facebook",
     "1/1/2023, 8:22 pm"
   ),
   createData(
@@ -92,7 +92,7 @@ export const rows = [
     "Mohamed Ahmed",
     "123456789",
     "karolinaolszewska@spy.com",
-    "Google  ADS",
+    "snapchat",
     "1/1/2023, 8:22 pm"
   ),
   createData(
@@ -101,7 +101,7 @@ export const rows = [
     "Mohamed Ahmed",
     "123456789",
     "karolinaolszewska@spy.com",
-    "Google  ADS",
+    "googleAds",
     "1/1/2023, 8:22 pm"
   ),
 ];

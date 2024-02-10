@@ -10,13 +10,12 @@
   }
 }
 
-.header button {
+.header .calendar {
   display: flex;
   align-items: center;
   justify-content: space-between;
   height: 40px;
   gap: 10px;
-  border-radius: 10px;
   padding: 12px 20px;
   border: none;
   color: #040404;
@@ -24,13 +23,31 @@
   font-size: 16px;
   transition: all 0.3s ease;
   border: solid 1px #1db2ff;
+  position: relative;
 }
 
-.header button:hover {
-  background: #1db2ff;
-  color: #fff;
+
+
+.header .calendar .date {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  z-index: 10;
+  background: #ffffff;
+  display: none;
+
 }
 
+.header .calendar .showDate {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  z-index: 10;
+  background: #ffffff;
+  display: block !important;
+  border: #03dafb solid 2px;
+
+}
 .container {
   padding: 10px 20px;
   background-color: white;
@@ -165,4 +182,17 @@
       margin-bottom: -15px;
     }
   }
+}
+
+
+
+/* table style  */
+
+.text{
+  color: #3d3d3d;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 0;
+  margin: 0;
+
 }

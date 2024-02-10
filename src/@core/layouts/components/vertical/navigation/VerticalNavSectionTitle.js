@@ -39,7 +39,12 @@ const VerticalNavSectionTitle = props => {
             ? { py: 1, px: (collapsedNavWidth - navigationBorderWidth - 22) / 8 }
             : { px: 8 }),
           '& .MuiTypography-root, & svg': {
-            color: 'text.disabled'
+            color: "#3D3D3D",
+              fontWeight:600,
+              fontSize:"12px",
+              opacity:"0.5",
+
+
           },
 
         }}

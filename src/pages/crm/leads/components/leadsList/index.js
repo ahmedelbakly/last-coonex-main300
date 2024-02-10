@@ -487,7 +487,7 @@ export default function ListLeads() {
                       </TableCell>
                       <TableCell align="left" width={"200px"} fontWeight={600}>
                         <div className={StyleSheet.action}>
-                          <ImWhatsapp fontSize={25} color="green" />
+                          <ImWhatsapp fontSize={25} color="#1db2ff" />
                           <p className={StyleSheet.itemStyle}> {row.phone}</p>
                         </div>
                       </TableCell>

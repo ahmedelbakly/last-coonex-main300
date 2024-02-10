@@ -1,11 +1,13 @@
 .action {
+  height: 100%;
+  width: 100%;
   display: flex !important;
   align-items: center;
   justify-content: center !important;
   gap: 30px;
   /* width: 180px; */
   margin: auto;
-  padding: 20px 0px !important;
+  padding: 10px 0px !important;
 }
 .action button {
   width: 24px;
@@ -21,7 +23,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
- margin-bottom: 10px;
+  margin-bottom: 10px;
   padding: 10px 0px;
 }
 
@@ -59,7 +61,12 @@
   height: 50px;
   padding: 12px 30px;
   color: #fff;
-  border:none;
-  cursor:pointer;
+  border: none;
+  cursor: pointer;
+}
 
+.itemStyleText {
+  color: #3d3d3d;
+  font-weight: 600;
+  font-size: 14px;
 }

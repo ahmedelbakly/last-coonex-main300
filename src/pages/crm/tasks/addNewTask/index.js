@@ -8,18 +8,12 @@ import { InputLayout } from "src/properties/shared-components/input-layout";
 import Link from "next/link";
 //**import useAuth that contain all shared data */
 import { useAuth } from "src/hooks/useAuth";
-import { validationAddLeads } from "src/@core/components/validation";
 import CustomSelect from "src/@core/components/custom-select";
 //** property data */
-import { propertyTypeTest } from "src/fileData/addBropertyData";
-//** import leadSource data */
-import { leadsSourceData } from "src/fileData/cmsLeadsData";
 import { SuccessOverlay } from "src/@core/components/overlays";
 import { PiMicrosoftExcelLogoThin } from "react-icons/pi";
 import { IoIosClose } from "react-icons/io";
-import Calendar from "src/store/apps/calendar";
 import CustomDate from "src/@core/components/cutomDate/CustomDate";
-import { fi } from "date-fns/locale";
 import {
   priorityOptionData,
   relatedToOption,

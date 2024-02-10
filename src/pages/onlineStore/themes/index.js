@@ -1,7 +1,6 @@
 import React from "react";
 import Grid from "@mui/material/Grid";
 import MediaCard from "src/@core/components/themesCard";
-import themeOneImage from "../../../../public/images/cms/themeOneImage.png";
 import themeTwoImage from "../../../../public/images/cms/themeTwoImage.png";
 import styles from "./style.module.css";
 import Image from "next/image";
@@ -13,6 +12,7 @@ import { themesData } from "src/fileData/themes_data";
 const StoreThemes = () => {
   const auth = useAuth();
   auth.setPages("Themes");
+  const {id} = auth.user
 
   //** start handle select theme */
   const [theme, setTheme] = useState("one");
@@ -67,7 +67,7 @@ const StoreThemes = () => {
           item
           className={styles.lastItem}
           xs={12}
-          sx={{ display: "flex", justifyContent: "space-between" }}
+
         >
           <div className={styles.speedRate}>
             <span>0%</span>
@@ -118,7 +118,7 @@ const StoreThemes = () => {
           </grid>
           <grid item xs={12} className={styles.theme}>
             <grid item xs={12}>
-              <Link href="https://ahmedelbakly.surge.sh/">
+            <Link href={`http://195.35.2.218/build/builder/lara/t/${id}`}>
                 <button className={styles.customizeBtn} >Customize</button>
               </Link>
             </grid>

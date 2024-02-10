@@ -14,20 +14,14 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
 import Checkbox from "@mui/material/Checkbox";
-import IconButton from "@mui/material/IconButton";
-import Tooltip from "@mui/material/Tooltip";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Switch from "@mui/material/Switch";
-import DeleteIcon from "@mui/icons-material/Delete";
-import FilterListIcon from "@mui/icons-material/FilterList";
-import { visuallyHidden } from "@mui/utils";
-import { deleteIcon, editIcon, eye, eyeIcon, rows } from "../../../fileData/PagesData";
-import StyleSheet from "./style.module.css";
 import SearchIcon from "@mui/icons-material/Search";
 import Link from "next/link";
 import { ConfirmOverlay, SuccessOverlay } from "src/@core/components/overlays";
 import { useState } from "react";
 import { useAuth } from "src/hooks/useAuth";
+import { deleteIcon, editIcon, eyeIcon, rows } from "src/fileData/PagesData";
+import { FormControlLabel, Switch } from "@mui/material";
+import StyleSheet from "./style.module.css";
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -46,10 +40,6 @@ function getComparator(order, orderBy) {
     : (a, b) => -descendingComparator(a, b, orderBy);
 }
 
-// Since 2020 all major browsers ensure sort stability with Array.prototype.sort().
-// stableSort() brings sort stability to non-modern browsers (notably IE11). If you
-// only support modern browsers you can replace stableSort(exampleArray, exampleComparator)
-// with exampleArray.slice().sort(exampleComparator)
 function stableSort(array, comparator) {
   const stabilizedThis = array.map((el, index) => [el, index]);
   stabilizedThis.sort((a, b) => {
@@ -121,18 +111,15 @@ function EnhancedTableHead(props) {
           <TableCell
             key={headCell.id}
             align={headCell.numeric ? "left" : "left"}
-
             sortDirection={orderBy === headCell.id ? order : false}
-            sx={{ textAlign: index === (0) ? "left" : "center" }}
+            sx={{ textAlign: index === 0 ? "left" : "center" }}
           >
-
-              {headCell.label}
-              {/* {orderBy === headCell.id ? (
+            {headCell.label}
+            {/* {orderBy === headCell.id ? (
                 <Box component="span" sx={visuallyHidden}>
                   {order === "desc" ? "sorted descending" : "sorted ascending"}
                 </Box>
               ) : null} */}
-
           </TableCell>
         ))}
       </TableRow>
@@ -185,20 +172,6 @@ function EnhancedTableToolbar(props) {
           Pages{" "}
         </Typography>
       )}
-
-      {/* {numSelected > 0 ? (
-        <Tooltip title="Delete">
-          <IconButton>
-            <DeleteIcon />
-          </IconButton>
-        </Tooltip>
-      ) : (
-        <Tooltip title="Filter list">
-          <IconButton>
-            <FilterListIcon />
-          </IconButton>
-        </Tooltip>
-      )} */}
     </Toolbar>
   );
 }
@@ -284,7 +257,7 @@ export default function EnhancedTable() {
   const [overLayConfirmOne, setOverLayConfirmOne] = useState(false);
   //** set page name  */
   const auth = useAuth();
-  auth.setPages("Pages")
+  auth.setPages("Pages");
 
   return (
     <Box
@@ -315,7 +288,7 @@ export default function EnhancedTable() {
       {/*  End overLay delete all Confirm*/}
       <div className={StyleSheet.subTitle}>
         <div className={StyleSheet.subTitleInput}>
-          <input type="search"  placeholder="Search here"/>
+          <input type="search" placeholder="Search here" />
           <SearchIcon className={StyleSheet.subTitleIcon} />
         </div>
         <Link href={"/onlineStore/pages/addNewPage"}>
@@ -375,17 +348,22 @@ export default function EnhancedTable() {
                       padding="none"
                       width={"250px"}
                     >
-                      {row.name}
+                      <span className={StyleSheet.itemStyleText}> {row.name}</span>
                     </TableCell>
                     <TableCell align="center" width={"250px"}>
-                      {row.creationDate}
+                      <span className={StyleSheet.itemStyleText}>
+                        {" "}
+                        {row.creationDate}
+                      </span>
                     </TableCell>
-                    <TableCell align="left" className={StyleSheet.action}>
-                      <button>{eyeIcon}</button>
-                      <button>{editIcon}</button>
-                      <button onClick={() => setOverLayConfirmOne(true)}>
-                        {deleteIcon}
-                      </button>
+                    <TableCell align="left">
+                      <div className={StyleSheet.action}>
+                        <button>{eyeIcon}</button>
+                        <button>{editIcon}</button>
+                        <button onClick={() => setOverLayConfirmOne(true)}>
+                          {deleteIcon}
+                        </button>
+                      </div>
                     </TableCell>
                   </TableRow>
                 );

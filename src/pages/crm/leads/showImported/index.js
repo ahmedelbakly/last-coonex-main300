@@ -9,24 +9,22 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
-import TableSortLabel from "@mui/material/TableSortLabel";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
-import { visuallyHidden } from "@mui/utils";
 import StyleSheet from "./style.module.css";
 import { ConfirmOverlay, SuccessOverlay } from "src/@core/components/overlays";
 import { useState } from "react";
 import avatarImg from "../../../../../public/images/cms/avatar.png";
 import Image from "next/image";
 import { useAuth } from "src/hooks/useAuth";
-import { ImWhatsapp } from "react-icons/im";
-import { CrmLeadsFakeData } from "src/@core/leadsData/leadsCrmFakeData";
 import { HandleLeadsSourceIcon } from "../../../../fileData/leadsShareFunction";
 import { leadSourceData } from "src/@core/leadsData/leadsCmsFakeData";
 import { deleteIcon, editIcon } from "src/@core/leadsData/leadsSourceIcon";
+import { FaWhatsapp } from "react-icons/fa";
+import { TfiEmail } from "react-icons/tfi";
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -416,12 +414,9 @@ export default function ShowImportedLeads() {
                     <TableRow
                       style={{
                         fontWeight: "600 !important",
-                        height: "50px !important",
                       }}
                       hover
                       onClick={(event) => handleClick(event, row.id)}
-                      // role="checkbox"
-                      // aria-checked={isItemSelected}
                       tabIndex={-1}
                       key={row.id}
                       // selected={isItemSelected}
@@ -436,70 +431,87 @@ export default function ShowImportedLeads() {
                         sx={{ width: "50px" }}
                         align="left"
                       >
-                        {row.leadsId}
+                        {row.id}
                       </TableCell>
                       <TableCell
                         sx={{
-                          width: "300px",
+                          width: "220px",
                           color: "#1DB2FF !important",
                           fontWeight: 600,
                         }}
                         align="left"
-                        className={StyleSheet.tableCell}
                       >
                         {row.fullName}
                       </TableCell>
-                      <TableCell
-                        align="left"
-                        width={200}
-                        fontWeight={600}
-                        sx={{
-                          display: "flex",
-                          alignItems: "flex-start !important",
-                          justifyContent: "center",
-                          gap: "10px",
-                          padding: "20px 0px !important",
-                          height: "60px !important",
-                        }}
-                      >
-                        <ImWhatsapp fontSize={10} />
-                        <p> {row.phone}</p>
+                      <TableCell align="left" width={200} fontWeight={600}>
+                        <div className={StyleSheet.itemFlex}>
+                          <FaWhatsapp
+                            fontSize={20}
+                            color="#1DB2FF"
+                            className={StyleSheet.icon}
+                          />
+                          <p className={StyleSheet.itemStyleText}>
+                            {row.phone}
+                          </p>
+                        </div>
                       </TableCell>
                       <TableCell align="left" width={250} fontWeight={600}>
-                        {row.email}
+                        <div className={StyleSheet.itemFlex}>
+                          <TfiEmail
+                            fontSize={20}
+                            color="#1DB2FF"
+                            className={StyleSheet.icon}
+                          />
+                          <p className={StyleSheet.itemStyleText}>
+                            {row.email}
+                          </p>
+                        </div>
                       </TableCell>
                       <TableCell align="center" width={150} fontWeight={600}>
                         {HandleLeadsSourceIcon(row.leadSource)}
                       </TableCell>
-                      <TableCell
-                        align="left"
-                        width={220}
-                        className={StyleSheet.assignTo}
-                      >
-                        <Image src={avatarImg} alt="avatar" />
-                        <span> {row.assignTo}</span>
+                      <TableCell align="left" width={220}>
+                        <div className={StyleSheet.assignTo}>
+                          <Image src={avatarImg} alt="avatar" />
+                          <span className={StyleSheet.itemStyleText}>
+                            {" "}
+                            {row.assignTo}
+                          </span>
+                        </div>
                       </TableCell>
 
                       <TableCell align="left" width={150}>
-                        {row.propertyId}
+                        <span className={StyleSheet.itemStyleText}>
+                          {row.propertyId}
+                        </span>
                       </TableCell>
                       <TableCell align="left" width={160}>
-                        {row.propertyType}
+                        <span className={StyleSheet.itemStyleText}>
+                          {row.propertyType}
+                        </span>
                       </TableCell>
                       <TableCell align="left" width={160}>
-                        {row.propertyValue}
+                        <span className={StyleSheet.itemStyleText}>
+                          {row.propertyValue}
+                        </span>
                       </TableCell>
                       <TableCell align="left" width={250}>
-                        {row.preferPrice}
+                        <span className={StyleSheet.itemStyleText}>
+                          {row.preferPrice}
+                        </span>
                       </TableCell>
                       <TableCell align="left" width={160}>
-                        {row.financeOption}
+                        <span className={StyleSheet.itemStyleText}>
+                          {row.financeOption}
+                        </span>
                       </TableCell>
-                      <TableCell align="left" className={StyleSheet.action}>
-                        <button>{editIcon}</button>
-                        <button onClick={() => setOverLayConfirm(true)}>
-                          {deleteIcon}
-                        </button>
+                      <TableCell align="left">
+                        <div className={StyleSheet.itemFlex}>
+                          <button>{editIcon}</button>
+                          <button onClick={() => setOverLayConfirm(true)}>
+                            {deleteIcon}
+                          </button>
+                        </div>
                       </TableCell>
                     </TableRow>
                   );

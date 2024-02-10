@@ -193,7 +193,9 @@ const VerticalNavGroup = (props) => {
               },
 
               "& .MuiTypography-root, & :not(.menu-item-meta) > svg": {
-                color: "text.secondary",
+                color: "#3D3D3D",
+              fontWeight:600,
+              fontSize:"14px"
               },
               "&.Mui-selected": {
                 backgroundColor: "#1DB2FF !important",
@@ -225,7 +227,7 @@ const VerticalNavGroup = (props) => {
               }}
             >
               {/* <UserIcon icon={icon} {...(parent && { fontSize: "0.625rem" })} /> */}
-              <Image 
+              <Image
                 src={item.icon}
                 alt="icon"
                 style={{

@@ -1,17 +1,24 @@
-.action {
+.itemFlex {
+  height: 100%;
+  width: 100%;
   display: flex !important;
   align-items: center;
-  justify-content: space-evenly !important;
-
+  justify-content: flex-start;
+  gap: 10px;
   margin: auto;
-  padding: 20px 0px !important;
+  padding: 10px 0px ;
 }
-.action button {
+.itemFlex .icon {
   width: 24px;
   height: 24px;
   border: none;
 }
 
+.itemStyleText {
+  color: #3d3d3d;
+  font-weight: 600;
+  font-size: 14px;
+}
 /*  ///////////////////////////////////////////////////////////////////////*/
 /* sub title */
 
@@ -90,14 +97,11 @@
   background: #1db2ff;
 }
 
-.tableCell {
-font-size: 14px !important;
-font-weight: 600 !important;
-}
+
 
 .assignTo {
-display: flex !important;
-padding: 17px 0px !important;
+display: flex ;
+padding: 10px 0px;
 align-items: center;
 justify-content: flex-start;
 gap: 10px;
@@ -107,12 +111,9 @@ gap: 10px;
 
 }
 
-.assignTo span {
-  font-weight: 600 !important;
 
-}
 .assignTo img {
- height: 40px;
- width: 40px;
+ height: 25px;
+ width: 25px;
  margin: 0;
 }

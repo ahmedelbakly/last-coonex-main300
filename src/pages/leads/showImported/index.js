@@ -9,30 +9,27 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
-import TableSortLabel from "@mui/material/TableSortLabel";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
-import Checkbox from "@mui/material/Checkbox";
-import IconButton from "@mui/material/IconButton";
-import Tooltip from "@mui/material/Tooltip";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
-import DeleteIcon from "@mui/icons-material/Delete";
-import FilterListIcon from "@mui/icons-material/FilterList";
-import { visuallyHidden } from "@mui/utils";
-import { deleteIcon, editIcon, eye, eyeIcon, rows } from "../../../fileData/cmsImportedLeadsData";
-import StyleSheet from "./style.module.css";
-import SearchIcon from "@mui/icons-material/Search";
-import Link from "next/link";
+import {
+  deleteIcon,
+  editIcon,
+  eye,
+  eyeIcon,
+  rows,
+} from "../../../fileData/cmsImportedLeadsData";
 import { ConfirmOverlay, SuccessOverlay } from "src/@core/components/overlays";
 import { useState } from "react";
-import { MdOutlineFileUpload } from "react-icons/md";
-import { IoIosAdd } from "react-icons/io";
-import avatarImg from "../../../../public/images/cms/avatar.png"
-import Image from "next/image"
+import avatarImg from "../../../../public/images/cms/avatar.png";
+import Image from "next/image";
 import { useAuth } from "src/hooks/useAuth";
-
+import StyleSheet from "./style.module.css";
+import { FaWhatsapp } from "react-icons/fa";
+import { TfiEmail } from "react-icons/tfi";
+import { HandleLeadsSourceIcon } from "src/fileData/leadsShareFunction";
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -51,10 +48,6 @@ function getComparator(order, orderBy) {
     : (a, b) => -descendingComparator(a, b, orderBy);
 }
 
-// Since 2020 all major browsers ensure sort stability with Array.prototype.sort().
-// stableSort() brings sort stability to non-modern browsers (notably IE11). If you
-// only support modern browsers you can replace stableSort(exampleArray, exampleComparator)
-// with exampleArray.slice().sort(exampleComparator)
 function stableSort(array, comparator) {
   const stabilizedThis = array.map((el, index) => [el, index]);
   stabilizedThis.sort((a, b) => {
@@ -331,41 +324,38 @@ export default function EnhancedTable() {
   const auth = useAuth();
   auth.setPages("Imported Leads");
 
-
   //** handle show imported popUp  */
   const handleShowImportedLeads = () => {
-   setShowImportedLeads(!showImportedLeads)
+    setShowImportedLeads(!showImportedLeads);
   };
 
-//* handle Show success overlay */
-const handleShowOverlay = ()=> {
-  setOverLaySuccess(!overLaySuccess)
-}
+  //* handle Show success overlay */
+  const handleShowOverlay = () => {
+    setOverLaySuccess(!overLaySuccess);
+  };
 
-//*handle cancel imported Leads */
-const handleShowConfirmOverlay = ()=>{
-  setOverLayConfirm(!overLayConfirm)
-}
+  //*handle cancel imported Leads */
+  const handleShowConfirmOverlay = () => {
+    setOverLayConfirm(!overLayConfirm);
+  };
 
-const handleCancelRole = ()=>{
-setOverLayConfirm(!overLayConfirm)
-}
+  const handleCancelRole = () => {
+    setOverLayConfirm(!overLayConfirm);
+  };
 
   return (
-    <div style={{width:"100%",background: "#F7F8F8"  }}>
-      <Box sx={{ width: "71vw", padding: " 0px 20px", position: "relative"}}>
-
+    <div style={{ width: "100%", background: "#F7F8F8" }}>
+      <Box sx={{ width: "71vw", padding: " 0px 20px", position: "relative" }}>
         <div className={StyleSheet.subTitle}>
-
-          <button className={StyleSheet.cancelBtn} onClick= {handleShowConfirmOverlay} >
-             Cancel
-            </button>
-            <button className={StyleSheet.confirmBtn} onClick={handleShowOverlay}>
-             Confirm
-            </button>
-
-
-
+          <button
+            className={StyleSheet.cancelBtn}
+            onClick={handleShowConfirmOverlay}
+          >
+            Cancel
+          </button>
+          <button className={StyleSheet.confirmBtn} onClick={handleShowOverlay}>
+            Confirm
+          </button>
         </div>
       </Box>
       <Box sx={{ width: "75vw", padding: "20px", position: "relative" }}>
@@ -385,8 +375,8 @@ setOverLayConfirm(!overLayConfirm)
           />
         )}
         {/* End cancel overLay Success */}
-         {/* start overLay delete all Confirm  */}
-         {overLayConfirm && (
+        {/* start overLay delete all Confirm  */}
+        {overLayConfirm && (
           <ConfirmOverlay
             message={"Do you want to cancel this Role?"}
             setState={setOverLayConfirm}
@@ -395,8 +385,6 @@ setOverLayConfirm(!overLayConfirm)
           />
         )}
         {/*  End overLay delete all Confirm*/}
-
-
 
         <Paper sx={{ width: "100%", mb: 2 }}>
           {/* <EnhancedTableToolbar numSelected={selected.length} /> */}
@@ -424,7 +412,8 @@ setOverLayConfirm(!overLayConfirm)
                   const labelId = `enhanced-table-checkbox-${index}`;
 
                   return (
-                    <TableRow style={{fontWeight:"600 !important"}}
+                    <TableRow
+                      style={{ fontWeight: "600 !important" }}
                       hover
                       onClick={(event) => handleClick(event, row.id)}
                       // role="checkbox"
@@ -449,38 +438,79 @@ setOverLayConfirm(!overLayConfirm)
                         id={labelId}
                         scope="row"
                         padding="none"
-                        sx={{ width: "50px" }}
+                        sx={{ width: "120px" }}
                         align="left"
                       >
-                        {row.num}
+                        <span className={StyleSheet.itemStyleText}>
+                          {row.num}
+                        </span>
                       </TableCell>
-                      <TableCell sx={{ width: "300px" }} align="left" fontWeight={600} className={StyleSheet.tableCell} >
-                        {row.fullName}
+                      <TableCell
+                        sx={{ width: "300px", paddingLeft: "30px" }}
+                        align="left"
+                        fontWeight={600}
+                        className={StyleSheet.tableCell}
+                      >
+                        <span className={StyleSheet.itemStyleText}>
+                          {row.fullName}
+                        </span>
                       </TableCell>
                       <TableCell align="left" width={200} fontWeight={600}>
-                        {row.phone}
+                        <div className={StyleSheet.itemFlex}>
+                          <FaWhatsapp
+                            fontSize={20}
+                            color="#1DB2FF"
+                            className={StyleSheet.icon}
+                          />
+                          <p className={StyleSheet.itemStyleText}>
+                            {row.phone}
+                          </p>
+                        </div>
                       </TableCell>
                       <TableCell align="left" width={250} fontWeight={600}>
-                        {row.email}
+                        <div className={StyleSheet.itemFlex}>
+                          <TfiEmail
+                            fontSize={20}
+                            color="#1DB2FF"
+                            className={StyleSheet.icon}
+                          />
+                          <p className={StyleSheet.itemStyleText}>
+                            {row.email}
+                          </p>
+                        </div>
                       </TableCell>
                       <TableCell align="center" width={150} fontWeight={600}>
-                        {row.leadSource}
+                        {HandleLeadsSourceIcon(row.leadSource)}
                       </TableCell>
-                      <TableCell align="left" width={220} className={StyleSheet.assignTo}>
-                      <Image src={avatarImg} alt="avatar"/>
-                       <span> {row.assignTo}</span>
+                      <TableCell
+                        align="left"
+                        width={220}
+
+                      >
+                        <div className={StyleSheet.assignTo}>
+                        <Image src={avatarImg} alt="avatar" />
+                        <span className={StyleSheet.itemStyleText}> {row.assignTo}</span>
+                        </div>
                       </TableCell>
                       <TableCell align="left" width={150}>
+                        <span className={StyleSheet.itemStyleText}>
                         {row.propertyId}
+                        </span>
                       </TableCell>
-                      <TableCell align="left" width={200}>
-                        {row.propertyType}
+                      <TableCell align="left" width={150}>
+                      <span className={StyleSheet.itemStyleText}>
+                      {row.propertyType}
+                      </span>
                       </TableCell>
                       <TableCell align="left" width={180}>
-                        {row.propertyValue}
+                      <span className={StyleSheet.itemStyleText}>
+                      {row.propertyValue}
+                      </span>
                       </TableCell>
                       <TableCell align="left" width={180}>
+                        <span className={StyleSheet.itemStyleText}>
                         {row.financeOption}
+                        </span>
                       </TableCell>
                     </TableRow>
                   );

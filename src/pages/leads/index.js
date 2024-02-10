@@ -9,23 +9,13 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
-import TableSortLabel from "@mui/material/TableSortLabel";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
-import Checkbox from "@mui/material/Checkbox";
-import IconButton from "@mui/material/IconButton";
-import Tooltip from "@mui/material/Tooltip";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
-import DeleteIcon from "@mui/icons-material/Delete";
-import FilterListIcon from "@mui/icons-material/FilterList";
-import { visuallyHidden } from "@mui/utils";
+
 import {
-  deleteIcon,
-  editIcon,
-  eye,
-  eyeIcon,
   leadsSourceData,
   rows,
 } from "../../fileData/cmsLeadsData";
@@ -42,6 +32,7 @@ import select from "src/@core/theme/overrides/select";
 import { useAuth } from "src/hooks/useAuth";
 import { TfiEmail } from "react-icons/tfi";
 import { FaWhatsapp } from "react-icons/fa";
+import { HandleLeadsSourceIcon } from "src/fileData/leadsShareFunction";
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -435,15 +426,7 @@ export default function EnhancedTable() {
                       align="left"
                       sx={{ cursor: "pointer", width: "100%", padding: 0 }}
                     >
-                      {/* <TableCell padding="checkbox">
-                      <Checkbox
-                        color="primary"
-                        checked={isItemSelected}
-                        inputProps={{
-                          "aria-labelledby": labelId,
-                        }}
-                      />
-                    </TableCell> */}
+
                       <TableCell
                         component="th"
                         id={labelId}
@@ -452,34 +435,53 @@ export default function EnhancedTable() {
                         sx={{ width: "50px" }}
                         align="left"
                       >
-                        {row.num}
+                       <span className={StyleSheet.itemStyleText}>
+                       {row.num}
+                       </span>
+
+
                       </TableCell>
-                      <TableCell sx={{ width: "300px" }} align="left">
-                        {row.fullName}
+                      <TableCell sx={{ width: "250px" }} align="left">
+                       <span className={StyleSheet.itemStyleText}>
+                       {row.fullName}
+                       </span>
+
                       </TableCell>
                       <TableCell
                         align="left"
-                        width={200}
-                        className={StyleSheet.action}
+                        width={160}
+
                       >
+                        <div className={StyleSheet.itemFlex}>
+
+
                         <FaWhatsapp
-                          fontSize={30}
+                          fontSize={20}
                           color="#1DB2FF"
                           className={StyleSheet.icon}
                         />
-                        <p style={{}}>{row.phone}</p>
+                        <p  className={StyleSheet.itemStyleText}>{row.phone}</p>
+                        </div>
                       </TableCell>
 
-                      <TableCell align="left" width={400}>
-                        <p>{row.email}</p>
-                        <TfiEmail />
+                      <TableCell align="left" width={280}>
+                      <div className={StyleSheet.itemFlex}>
+                      <TfiEmail  fontSize={20} color="#1DB2FF" className={StyleSheet.icon}/>
+                        <p className={StyleSheet.itemStyleText}>{row.email}</p>
+                      </div>
                       </TableCell>
-                      <TableCell align="left" width={220}>
-                        {row.leadSource}
+                      <TableCell align="center" width={150}>
+                      <span className={StyleSheet.itemStyleText}>
+                      {HandleLeadsSourceIcon(row.leadSource)}
+                      </span>
                       </TableCell>
-                      <TableCell align="left" width={220}>
-                        {row.createdAt}
+                      <TableCell align="left" width={200}>
+                      <span className={StyleSheet.itemStyleText}>
+                      {row.createdAt}
+                      </span>
                       </TableCell>
+
+
                     </TableRow>
                   );
                 })}

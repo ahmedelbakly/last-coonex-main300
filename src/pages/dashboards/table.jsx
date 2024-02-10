@@ -7,22 +7,14 @@ import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
-import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import TableSortLabel from "@mui/material/TableSortLabel";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
-import Checkbox from "@mui/material/Checkbox";
-import IconButton from "@mui/material/IconButton";
-import Tooltip from "@mui/material/Tooltip";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Switch from "@mui/material/Switch";
-import DeleteIcon from "@mui/icons-material/Delete";
-import FilterListIcon from "@mui/icons-material/FilterList";
-import { visuallyHidden } from "@mui/utils";
 import dashAvatar from "../../../public/images/cms/dashAvatar.png";
 import Image from "next/image";
+import styleSheet from "./style.module.css";
 
 const editIcon = (
   <svg
@@ -101,6 +93,8 @@ const rows = [
   createData(3, "Small house in Bolzano", "1239664", "1234568", "1239664"),
   createData(3, "Small house in Bolzano", "1239664", "1234568", "1239664"),
   createData(3, "Small house in Bolzano", "1239664", "1234568", "1239664"),
+  createData(3, "Small house in Bolzano", "1239664", "1234568", "1239664"),
+  
 ];
 
 function descendingComparator(a, b, orderBy) {
@@ -230,19 +224,19 @@ function EnhancedTableToolbar(props) {
     >
       {
         <Typography
-          sx={{ flex: "1 1 100%" }}
+          sx={{ flex: "1 1 100%",color: "#3D3D3D", fontWeight: 600 }}
           variant="h6"
           id="tableTitle"
           component="div"
-
         >
-          Top <span style={{ color:"#1DB2FF"}}>{rows.length}</span> Visited Properties
+          Top <span style={{ color: "#1DB2FF" }}>{rows.length}</span> Visited
+          Properties
         </Typography>
       }
 
       <Typography
         variant="h6"
-        sx={{ width: "100px", color: "#1DB2FF", fontWeight: 600 }}
+        sx={{ width: "100px", color: "#1DB2FF", fontWeight: 600, cursor: "pointer" }}
       >
         See More
       </Typography>
@@ -260,7 +254,7 @@ export default function EnhancedTable({ handleShowConfirmOverLay }) {
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [rowsPerPage, setRowsPerPage] = React.useState(rows.length);
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
@@ -326,7 +320,7 @@ export default function EnhancedTable({ handleShowConfirmOverLay }) {
   );
 
   return (
-    <Box sx={{ width: "100%", marginTop:2 }}>
+    <Box sx={{ width: "100%", marginTop: 2 }}>
       <Paper sx={{ width: "100%", mb: 2 }}>
         <EnhancedTableToolbar numSelected={selected.length} />
         <TableContainer>
@@ -373,12 +367,20 @@ export default function EnhancedTable({ handleShowConfirmOverLay }) {
                       }}
                     >
                       <Image src={dashAvatar} alt="dashAvatar" />
-                      <h4>{row.propertyName}</h4>
+                      <h4 className={styleSheet.text}>{row.propertyName}</h4>
                     </TableCell>
-                    <TableCell align="left" fontWeight={600}>{row.impressionsNumber}</TableCell>
-                    <TableCell align="left" fontWeight={600}>{row.clicksNumber}</TableCell>
                     <TableCell align="left" fontWeight={600}>
-                      {row.leads}
+                      <span className={styleSheet.text}>
+                        {row.impressionsNumber}
+                      </span>
+                    </TableCell>
+                    <TableCell align="left" fontWeight={600}>
+                      <span className={styleSheet.text}>
+                        {row.clicksNumber}
+                      </span>
+                    </TableCell>
+                    <TableCell align="left" fontWeight={600}>
+                      <span className={styleSheet.text}>{row.leads}</span>
                     </TableCell>
                   </TableRow>
                 );

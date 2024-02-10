@@ -36,3 +36,8 @@ code[class*='language-'] {
   padding: 0;
 }
 
+
+.rbc-event{
+padding: 2px !important;
+background-color: #fff;
+}

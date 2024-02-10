@@ -1,0 +1,21 @@
+.bigCalendar {
+  width: 100%;
+  background: #000;
+  position: relative;
+
+  & .addEvent {
+    position: absolute;
+    top: 0;
+    left: 58%;
+    padding: 6px 10px;
+    border-radius: 5px;
+    z-index: 1;
+    cursor: pointer;
+    color: white;
+    background: #1db2ff;
+    border: none;
+    font-size: 14px;
+  }
+}
+
+

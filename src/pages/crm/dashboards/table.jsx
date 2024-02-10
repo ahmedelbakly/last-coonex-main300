@@ -13,16 +13,9 @@ import TableSortLabel from "@mui/material/TableSortLabel";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
-import Checkbox from "@mui/material/Checkbox";
-import IconButton from "@mui/material/IconButton";
-import Tooltip from "@mui/material/Tooltip";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Switch from "@mui/material/Switch";
-import DeleteIcon from "@mui/icons-material/Delete";
-import FilterListIcon from "@mui/icons-material/FilterList";
-import { visuallyHidden } from "@mui/utils";
 import dashAvatar from "../../../../public/images/cms/dashAvatar.png";
 import Image from "next/image";
+import StyleSheet from "./style.module.css";
 
 const editIcon = (
   <svg
@@ -242,7 +235,7 @@ function EnhancedTableToolbar(props) {
 
       <Typography
         variant="h6"
-        sx={{ width: "100px", color: "#1DB2FF", fontWeight: 600 }}
+        sx={{ width: "100px", color: "#1DB2FF", fontWeight: 600, cursor: "pointer" }}
       >
         See More
       </Typography>
@@ -373,12 +366,12 @@ export default function EnhancedTable({ handleShowConfirmOverLay }) {
                       }}
                     >
                       <Image src={dashAvatar} alt="dashAvatar" />
-                      <h4>{row.propertyName}</h4>
+                      <h4 className={StyleSheet.itemStyleText}>{row.propertyName}</h4>
                     </TableCell>
-                    <TableCell align="left" fontWeight={600}>{row.impressionsNumber}</TableCell>
-                    <TableCell align="left" fontWeight={600}>{row.clicksNumber}</TableCell>
+                    <TableCell align="left" fontWeight={600}><span  className={StyleSheet.itemStyleText}>{row.impressionsNumber}</span></TableCell>
+                    <TableCell align="left" fontWeight={600}><span  className={StyleSheet.itemStyleText}>{row.clicksNumber}</span></TableCell>
                     <TableCell align="left" fontWeight={600}>
-                      {row.leads}
+                     <span  className={StyleSheet.itemStyleText}> {row.leads}</span>
                     </TableCell>
                   </TableRow>
                 );

@@ -1,0 +1,61 @@
+/* handle overlay */
+.addEvent {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.9);
+  z-index: 2000;
+
+  /* center content by position */
+  & .content {
+    /* center content by position */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 700px;
+    height: 400px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 8px 32px rgba(black, 0.3);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    padding: 20px;
+    z-index: 3000;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 20px;
+
+    & .close {
+      font-size: 20px;
+      cursor: pointer;
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      color: #ffffff;
+      background-color: red;
+      border-radius: 5px;
+    }
+
+    & .towInOneContainer {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 20px;
+
+      & .inputContainer {
+       width: 50%;
+      }
+
+    }
+
+  }
+}

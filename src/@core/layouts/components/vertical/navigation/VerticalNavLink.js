@@ -27,7 +27,7 @@ import Image from "next/image";
 // ** Styled Components
 const MenuNavLink = styled(ListItemButton)(({ theme }) => ({
   width: "100%",
-  color: "black !important",
+  color: "red !important",
   marginLeft: theme.spacing(3.5),
   marginRight: theme.spacing(3.5),
   borderRadius: theme.shape.borderRadius,
@@ -122,7 +122,9 @@ const VerticalNavLink = ({
                 ? (collapsedNavWidth - navigationBorderWidth - 22 - 28) / 8
                 : 4,
             "& .MuiTypography-root, & svg": {
-              color: "text.secondary",
+              color: "#3D3D3D",
+              fontWeight:600,
+              fontSize:"12px"
             },
           }}
         >

@@ -12,6 +12,7 @@ import { MeetingItem, RentAndSale } from "../../../fileData/shard components";
 import VideoSlide from "./components/video.js";
 import { useState } from "react";
 import { useAuth } from "src/hooks/useAuth";
+import DateCalendarValue from "src/@core/components/calender/Calender";
 
 const rentIcon = (
   <svg
@@ -89,15 +90,16 @@ const saleIcon = (
   </svg>
 );
 const HomePage = () => {
-
-  const auth = useAuth()
- auth.setPages("Dashboard")
-
-
-
-
+  const { setPages, user } = useAuth();
+  setPages("Dashboard");
 
   const [videoOverlay, setVideoOverlay] = useState(false);
+  //** handle show calender */
+  const [showCalender, setShowCalender] = useState(false);
+  //* function/
+  const handleShowDate = () => {
+    setShowCalender(!showCalender);
+  };
 
   //* handle close video overlay */
   const handleShowVideo = () => {
@@ -118,12 +120,32 @@ const HomePage = () => {
             fontWeight={600}
             color={"black"}
           >
-            Welcome back Omar Elbakly{" "}
+            Welcome back{" "}
+            <span
+              style={{ color: "#1DB2FF", fontWeight: 600, textTransform: "capitalize" }}
+            >{` ${user.firstname} ${user.lastname}`}</span>
           </Typography>
-          <button>
+          <div
+            className={styleSheet.calendar}
+            onClick={handleShowDate}
+            style={{
+              borderRadius: showCalender ? "8px 8px 0px 0px" : "8px",
+              background: showCalender ? "#1db2ff" : "#FFF",
+              color: showCalender ? "#fff" : "#000",
+            }}
+          >
             <CiCalendar fontSize={30} />
             <span>Last Year</span>
-          </button>
+            <div
+              className={showCalender ? styleSheet.showDate : styleSheet.date}
+            >
+              <DateCalendarValue
+                handleDate="{handleDate}"
+                propertyName=""
+                handleShowDate="{handleShowDate}"
+              />
+            </div>
+          </div>
         </Grid>
         <Grid item xs={12}></Grid>
       </Grid>
@@ -136,28 +158,16 @@ const HomePage = () => {
         justifyContent={"space-between"}
       >
         <Grid container xs={7.4} className={styleSheet.item1}>
-
           <Grid item className={styleSheet.chart1}>
             <Image src={Chart2} alt="Chart2" />
           </Grid>
         </Grid>
         <Grid item xs={4.25} className={styleSheet.item2}>
-
           <Grid item className={styleSheet.meetingItem}>
             <h6 className={styleSheet.title}>Today’s Activities</h6>
-            <MeetingItem
-              name={"Ahmed Elbakly"}
-              time={5}
-            />
-            <MeetingItem
-              name={"Ahmed Elbakly"}
-              time={5}
-            />
-            <MeetingItem
-              name={"Ahmed Elbakly"}
-              time={5}
-            />
-
+            <MeetingItem name={"Ahmed Elbakly"} time={5} />
+            <MeetingItem name={"Ahmed Elbakly"} time={5} />
+            <MeetingItem name={"Ahmed Elbakly"} time={5} />
           </Grid>
         </Grid>
       </Grid>
