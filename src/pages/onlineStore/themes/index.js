@@ -13,6 +13,7 @@ import { themesData } from "src/fileData/themes_data";
 const StoreThemes = () => {
   const auth = useAuth();
   auth.setPages("Themes");
+  const {id} = auth.user
 
   //** start handle select theme */
   const [theme, setTheme] = useState("one");
@@ -118,7 +119,7 @@ const StoreThemes = () => {
           </grid>
           <grid item xs={12} className={styles.theme}>
             <grid item xs={12}>
-              <Link href="https://ahmedelbakly.surge.sh/">
+              <Link href={`http://195.35.2.218/build/builder/lara/t/${id}`}>
                 <button className={styles.customizeBtn} >Customize</button>
               </Link>
             </grid>
