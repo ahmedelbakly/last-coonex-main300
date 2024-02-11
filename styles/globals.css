@@ -39,5 +39,39 @@ code[class*='language-'] {
 
 .rbc-event{
 padding: 2px !important;
-background-color: #fff;
+background-color: #f2ebeb;
+border: 1px solid #f84c03 !important;
+box-shadow: -1px 0px 8px rgba(17, 17, 17, 0.25);
+transition: all .2s ease-in-out;
+&:hover{
+  background-color:#e6dfdf;
 }
+}
+.rbc-day-bg {
+  background-color: #1db4ff75!important;
+  padding: 5px;
+}
+
+.rbc-button-link {
+ color: #010101 !important;
+ font-weight: 600 !important;
+ font-size: 12px !important;
+}
+
+.rbc-active {
+  background-color: #1DB2FF!important;
+  color: #fff !important;
+}
+
+.rbc-toolbar-label{
+  font-size: 20px !important;
+  font-weight: 600 !important;
+  color: #010101 !important;
+
+}
+
+.rbc-header{
+ background-color: #0370a3b4 !important;
+ color: #fff !important;
+}
+

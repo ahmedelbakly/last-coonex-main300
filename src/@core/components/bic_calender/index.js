@@ -57,7 +57,7 @@ const MyCalendar = ({handleShowAdd}) => {
   ];
   const event = ({ event }) => {
     return (
-      <div style={{ height: "55px",background:"#1db2ff",width:"100%",padding:"5px" }}>
+      <div style={{ height: "55px",background:"#fff",color:"#000", width:"100%",padding:"5px" }}>
         {event.name} <br /> <small>{event.description}</small>{" "}
       </div>
     );

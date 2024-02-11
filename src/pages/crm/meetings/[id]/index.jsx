@@ -6,15 +6,14 @@ import CustomSelect from "src/@core/components/custom-select";
 import { relatedToOption } from "src/fileData/tasksData";
 import { Grid } from "@mui/material";
 import { InputLayout } from "src/properties/shared-components/input-layout";
-import Time from "src/@core/components/timepeker";
-import { TimePicker } from "@mui/x-date-pickers";
-import BasicTimePicker from "src/@core/components/timepeker";
-import TimePickerValue from "src/@core/components/timepeker";
-import PickersTime from "src/@core/components/timepeker";
 import Link from "next/link";
+import { SuccessOverlay } from "src/@core/components/overlays";
+import {useRouter } from "next/router";
 
-const AddEvent = ({ handleShowAdd, handleSuccessOverlay }) => {
+const EditEvent = ({ handleShowAdd, handleSuccessOverlay }) => {
+  const router = useRouter();
   //** handle overlay */
+  const [successEditOverlay, setSuccessEditOverlay] = useState(false);
 
   const [addEventData, setAddEventData] = useState({
     title: "",
@@ -52,12 +51,28 @@ const AddEvent = ({ handleShowAdd, handleSuccessOverlay }) => {
     });
   };
 
+  const handleSuccess = () => {
+    setSuccessEditOverlay(true);
+    setTimeout(() => {
+      setSuccessEditOverlay(false);
+      router.push("/crm/meetings");
+    }, 2000);
+  };
+
   return (
     <div className={styleSheet.addEvent}>
-
+      {successEditOverlay && (
+        <SuccessOverlay
+          message={"Edit Event Successfully"}
+          setState={setSuccessEditOverlay}
+          route={"/crm/meetings"}
+        />
+      )}
       <div className={styleSheet.content}>
-        <h3 className={styleSheet.title}>Add Event</h3>
-        <IoClose className={styleSheet.close} onClick={() => handleShowAdd()} />
+        <h3 className={styleSheet.title}>Edit Event</h3>
+        <Link href="/crm/meetings">
+          <IoClose className={styleSheet.close} />
+        </Link>
         <Grid container className={styleSheet.towInOneContainer}>
           {/** start task name  */}
           <Grid item sx={{ flex: 1 }}>
@@ -130,15 +145,14 @@ const AddEvent = ({ handleShowAdd, handleSuccessOverlay }) => {
         </InputLayout>
         <div className={styleSheet.nextAndPrev}>
           <Link href="/crm/meetings">
-            <button onClick={() => handleShowAdd()}>Cancel</button>
+            <button>Cancel</button>
           </Link>
           <button
             onClick={() => {
-              handleShowAdd();
-              handleSuccessOverlay();
+              handleSuccess();
             }}
           >
-            Add
+            Update
           </button>
         </div>
       </div>
@@ -146,4 +160,4 @@ const AddEvent = ({ handleShowAdd, handleSuccessOverlay }) => {
   );
 };
 
-export default AddEvent;
+export default EditEvent;
