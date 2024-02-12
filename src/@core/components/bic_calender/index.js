@@ -4,7 +4,7 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 import styleSheet from "./style.module.css";
 const localizer = momentLocalizer(moment);
 
-const MyCalendar = ({handleShowAdd}) => {
+const MyCalendar = ({ handleShowAdd, handleShowAllEvents }) => {
   const events = [
     {
       id: 0,
@@ -57,7 +57,15 @@ const MyCalendar = ({handleShowAdd}) => {
   ];
   const event = ({ event }) => {
     return (
-      <div style={{ height: "55px",background:"#fff",color:"#000", width:"100%",padding:"5px" }}>
+      <div
+        style={{
+          height: "55px",
+          background: "#fff",
+          color: "#000",
+          width: "100%",
+          padding: "5px",
+        }}
+      onClick={handleShowAllEvents} >
         {event.name} <br /> <small>{event.description}</small>{" "}
       </div>
     );
@@ -65,16 +73,16 @@ const MyCalendar = ({handleShowAdd}) => {
   return (
     <div className={styleSheet.bigCalendar}>
       <button className={styleSheet.addEvent} onClick={handleShowAdd}>
-      Add Event
+        Add Event
       </button>
       <Calendar
         localizer={localizer}
         events={events}
         startAccessor="start"
         endAccessor="end"
-        style={{ minHeight: 580,background:"#Fff" }}
+        style={{ minHeight: 580, background: "#Fff" }}
         components={{
-          event: event
+          event: event,
         }}
       />
     </div>

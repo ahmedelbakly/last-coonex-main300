@@ -70,7 +70,7 @@ const Meetings = () => {
           func={handleDeleteConfirm}
         />
       )}
-      <BigCalender handleShowAdd={handleShowAdd} />
+      <BigCalender handleShowAdd={handleShowAdd}  handleShowAllEvents={handleShowAllEvents} />
     </div>
   );
 };
