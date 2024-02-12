@@ -15,7 +15,7 @@ const Meetings = () => {
   const [successOverlay, setSuccessOverlay] = useState(false);
   const [successDeleteOverlay, setSuccessDeleteOverlay] = useState(false);
 
-  const [showAllEvents, setShowAllEvents] = useState(true);
+  const [showAllEvents, setShowAllEvents] = useState(false);
   const [showConfirmOverlay, setShowConfirmOverlay] = useState(false);
 
   //** handle show overlay */
