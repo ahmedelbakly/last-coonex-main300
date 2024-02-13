@@ -8,6 +8,7 @@ import { RiArrowDropDownLine } from "react-icons/ri";
 import { AiOutlineMail } from "react-icons/ai";
 import { HiOutlinePhone } from "react-icons/hi";
 import avatar from "../../../../../public/images/cms/avatar.png";
+import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
 //** import leadSource icons */
 import {
   dropdownIcon,
@@ -63,10 +64,9 @@ const historyIcon = (
     />
   </svg>
 );
-
+const fakeStreamData = [1, 2, 3, 4];
 const LeadsProfile = () => {
   //**HANDLE LEAD SOURCE ICON */
-
 
   //**handle icon of leads profile */
   const handleLeadSourceIcon = (lead) => {
@@ -88,8 +88,8 @@ const LeadsProfile = () => {
   auth.setPages("Lead Profile");
 
   return (
-    <>
-    {/** START TITLE OF PAGE */}
+    <div style={{ marginBottom: "100px" }}>
+      {/** START TITLE OF PAGE */}
       <div className={StyleSheet.title}>
         <h5 className={StyleSheet.titleName}>Mohamed Ahmed Mohamed</h5>
         <div className={StyleSheet.buttons}>
@@ -101,7 +101,7 @@ const LeadsProfile = () => {
           </button>
         </div>
       </div>
-       {/** END TITLE OF PAGE */}
+      {/** END TITLE OF PAGE */}
       <div className={StyleSheet.leadsProfileContainer}>
         <div className={StyleSheet.rightContainer}>
           {/*start overview */}
@@ -176,8 +176,25 @@ const LeadsProfile = () => {
                   Post
                 </button>
               </form>
-
               {/** End stream input */}
+              {/* Start Stream list */}
+
+              <div className={StyleSheet.streamList}>
+                {fakeStreamData.map((item, index) => (
+                  <div className={StyleSheet.streamItem}>
+                    <div className={StyleSheet.streamNameIcon}>
+                      <LocalPhoneIcon className={StyleSheet.icon} />
+                      <p className={StyleSheet.text}>
+                        <span className={StyleSheet.name}>Ahmed Elbakly</span>{" "}
+                        linked the meeting New website design presentation with
+                        this lead
+                      </p>
+                    </div>
+                    <p className={StyleSheet.time}>December 7, 2023, 2:14 pm</p>
+                  </div>
+                ))}
+              </div>
+              {/* End Stream list */}
             </div>
 
             {/*End stream */}
@@ -357,7 +374,7 @@ const LeadsProfile = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

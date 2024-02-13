@@ -13,7 +13,7 @@ const KanbanCard = ({ leadSource, user, id }) => {
   const router = useRouter();
   //** HANDLE SHOW LEADS PROFILE */
   const handleShowLead = (id) => {
-    router.push(`/crm/leads/${id}`);
+    router.push(`/crm/crmLeads/${id}`);
     auth.setLeadId(id);
   };
 

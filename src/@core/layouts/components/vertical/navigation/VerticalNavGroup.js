@@ -228,7 +228,8 @@ const VerticalNavGroup = (props) => {
             >
               {/* <UserIcon icon={icon} {...(parent && { fontSize: "0.625rem" })} /> */}
               <Image
-                src={item.icon}
+                src={(groupActive.includes(item.title) ||
+                  currentActiveGroup.includes(item.title))? item.activeIcon : item.icon}
                 alt="icon"
                 style={{
                   width: "24px",

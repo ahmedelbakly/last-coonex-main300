@@ -51,6 +51,22 @@ const MenuNavLink = styled(ListItemButton)(({ theme }) => ({
 
     },
   },
+  "&.activeAsGroup": {
+    "&, &:hover": {
+    background: `${theme.palette.primary.main} !important`,
+     //  background: `#000 !important`,
+      color: "#fff",
+      "&.Mui-focusVisible": {
+        background: `linear-gradient(72.47deg, ${
+          theme.palette.primary.dark
+        } 22.16%, ${hexToRGBA(theme.palette.primary.dark, 0.7)} 76.47%)`,
+      },
+    },
+    "& .MuiTypography-root, & svg": {
+      color: `#fff !important`,
+
+    },
+  },
 }));
 
 const MenuItemTextMetaWrapper = styled(Box)(({ theme }) => ({
@@ -100,7 +116,7 @@ const VerticalNavLink = ({
         <MenuNavLink
           component={Link}
           {...(item.disabled && { tabIndex: -1 })}
-          className={isNavLinkActive() ? "active" : ""}
+          className={isNavLinkActive() ? item.type==="asGroup" ? "activeAsGroup" :  "active" : ""}
           href={item.path === undefined ? "/" : `${item.path}`}
           {...(item.openInNewTab ? { target: "_blank" } : null)}
           onClick={(e) => {
@@ -142,7 +158,10 @@ const VerticalNavLink = ({
           >
             {item.icon ? (
 
-                <Image src={item.icon} alt="item" />
+                <Image src={isNavLinkActive() ? item.activeIcon : item.icon} alt="item" style={{
+                  width: 25,
+                  height: 25
+                }}/>
 
             ) : (
               <UserIcon icon={icon} />
@@ -162,6 +181,10 @@ const VerticalNavLink = ({
                   !navHover)) && {
                 noWrap: true,
               })}
+              sx={{
+                color: "#3D3D3D",
+                fontWeight:600,
+                fontSize: item.type === "asGroup" ? "14px !important" : "12px",        }}
             >
               <Translations text={item.title} />
             </Typography>

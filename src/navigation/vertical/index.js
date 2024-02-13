@@ -1,28 +1,31 @@
 //** import image icon  */ */
 
-import crmIcon from "../../../public/images/cms/CrmIcon2.png";
-import webSiteIcon from "../../../public/images/cms/websiteIcon.png";
+import crmIcon from "../../../public/images/crm/crm.png";
+import crmIconActive from "../../../public/images/crm/crmActive.png";
+import webSiteIcon from "../../../public/images/crm/online-store-not.png";
+import webSiteIconActive from "../../../public/images/crm/online-store -active.png";
 import AdvertIcon from "../../../public/images/cms/advertiseIcon.png";
-import leadIcon from "../../../public/images/cms/leadsIcon.png";
+import leadIcon from "../../../public/images/crm/leads-icon.png";
+import leadIconActive from "../../../public/images/crm/leads-icon-active.png";
 import analyticsIcon from "../../../public/images/cms/analiyicIcon.png";
-import dashIcon from "../../../public/images/cms/dashIcon.png"
-import setting from "../../../public/images/cms/setting.svg"
-import helpIcon from "../../../public/images/cms/helpIcon2.svg"
-
-
-
-
+import dashIcon from "../../../public/images/crm/dashboard.png";
+import dashIconActive from "../../../public/images/crm/dashboard-active.png";
+import setting from "../../../public/images/cms/setting.svg";
+import helpIcon from "../../../public/images/cms/helpIcon2.svg";
 
 const navigation = () => {
   return [
     {
       title: "Dashboards",
       icon: dashIcon,
+      activeIcon: dashIconActive,
       path: "/dashboards",
+      type: "asGroup",
     },
     {
       title: "Website",
       icon: webSiteIcon,
+      activeIcon: webSiteIconActive,
       children: [
         {
           title: "Themes",
@@ -57,7 +60,9 @@ const navigation = () => {
     {
       title: "Leads",
       icon: leadIcon,
+      activeIcon: leadIconActive,
       path: "/leads",
+      type: "asGroup",
     },
     {
       title: "Analytics",
@@ -75,11 +80,9 @@ const navigation = () => {
         {
           title: "Themes",
           path: "/onlineStore/themes",
-        }
-
+        },
       ],
     },
-
 
     {
       sectionTitle: "CRM",
@@ -87,6 +90,7 @@ const navigation = () => {
     {
       title: "CRM",
       icon: crmIcon,
+      activeIcon: crmIconActive,
       children: [
         {
           title: "Dashboard",
@@ -94,7 +98,7 @@ const navigation = () => {
         },
         {
           title: "Leads",
-          path: "/crm/leads",
+          path: "/crm/crmLeads",
         },
         {
           title: "Tasks",

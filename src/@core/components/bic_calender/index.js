@@ -66,7 +66,7 @@ const MyCalendar = ({ handleShowAdd, handleShowAllEvents }) => {
           padding: "5px",
         }}
       onClick={handleShowAllEvents} >
-        {event.name} <br /> <small>{event.description}</small>{" "}
+       {event.name} <br /> <small>{event.description}</small>{" "}
       </div>
     );
   };

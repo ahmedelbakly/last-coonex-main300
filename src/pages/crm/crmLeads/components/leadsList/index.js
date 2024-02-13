@@ -479,7 +479,7 @@ export default function ListLeads() {
                         <span
                           onClick={() => {
                             handleSetLeadId(row.id);
-                            router.push(`/crm/leads/${row.id}`);
+                            router.push(`/crm/crmLeads/${row.id}`);
                           }}
                         >
                           {row.fullName}
