@@ -22,7 +22,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import { visuallyHidden } from "@mui/utils";
 import { Pending } from "@mui/icons-material";
-import { deleteIcon, editIcon } from "../../fileData/settingData";
+import { deleteIcon, editIcon } from "../../../fileData/settingData";
 
 function createData(id, roleName, creationDate, status) {
   return {
@@ -298,7 +298,7 @@ export default function EnhancedTable({
         {/* <EnhancedTableToolbar numSelected={selected.length} /> */}
         <TableContainer>
           <Table
-            sx={{ minWidth: 750 }}
+            sx={{ minWidth: 500, overflowX: "scroll",border:"2px solid #e2e2e2",borderRadius:'20px' }}
             aria-labelledby="tableTitle"
             size={dense ? "small" : "medium"}
           >
@@ -368,33 +368,36 @@ export default function EnhancedTable({
                     </TableCell>
                     <TableCell
                       align="center"
-                      sx={{
+
+                    >
+                      <div  style={{
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
                         gap: "10px",
-                        padding: "10px",
-                      }}
-                    >
-                      <button
-                        style={{
-                          background: "transparent",
-                          border: "none",
-                          cursor: "pointer",
-                        }}
-                      >
-                        {editIcon}
-                      </button>
-                      <button
-                        style={{
-                          background: "transparent",
-                          border: "none",
-                          cursor: "pointer",
-                        }}
-                        onClick={() => handleShowDeleteOneConfirm()}
-                      >
-                        {deleteIcon}
-                      </button>
+                        height: "100%",
+                        width: "100%",
+                      }}>
+                        <button
+                          style={{
+                            background: "transparent",
+                            border: "none",
+                            cursor: "pointer",
+                          }}
+                        >
+                          {editIcon}
+                        </button>
+                        <button
+                          style={{
+                            background: "transparent",
+                            border: "none",
+                            cursor: "pointer",
+                          }}
+                          onClick={() => handleShowDeleteOneConfirm()}
+                        >
+                          {deleteIcon}
+                        </button>
+                      </div>
                     </TableCell>
                   </TableRow>
                 );

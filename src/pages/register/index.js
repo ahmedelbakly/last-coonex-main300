@@ -83,16 +83,17 @@ const schema = yup.object().shape({
   firstName: yup.string().required(),
   lastName: yup.string().required(),
   email: yup.string().email().required(),
-   password: yup.string().min(8).required(),
-   confirmPassword: yup.string()
-  .label("confirm password")
-  .required()
-  .oneOf([yup.ref("password"), null], "Passwords must match"),
-   domain: yup.string().required(),
-   jobTitle: yup.string().required(),
+  password: yup.string().min(8).required(),
+  confirmPassword: yup
+    .string()
+    .label("confirm password")
+    .required()
+    .oneOf([yup.ref("password"), null], "Passwords must match"),
+  domain: yup.string().required(),
+  jobTitle: yup.string().required(),
   phoneNumber: yup.number().required(),
   conditionAgree: yup.boolean().oneOf([true]),
-   role: yup.string().required(),
+  role: yup.string().required(),
   city: yup.string().required(),
 });
 
@@ -109,7 +110,7 @@ const defaultValues = {
   email: "",
   password: "",
   domain: "",
-  conditionAgree:null,
+  conditionAgree: null,
   confirmPassword: null,
   phoneNumber: null,
   city: "",
@@ -172,7 +173,6 @@ const Register = () => {
         message: `${error.response.data.message}`,
       });
     }
-    
   };
 
   // handle checkbox
@@ -333,7 +333,6 @@ const Register = () => {
                       render={({ field: { value, onChange, onBlur } }) => (
                         <CustomTextField
                           fullWidth
-                          autoFocus
                           label="First Name"
                           value={value}
                           onBlur={onBlur}
@@ -356,7 +355,6 @@ const Register = () => {
                       render={({ field: { value, onChange, onBlur } }) => (
                         <CustomTextField
                           fullWidth
-                          autoFocus
                           label="Last Name"
                           value={value}
                           onBlur={onBlur}
@@ -378,7 +376,6 @@ const Register = () => {
                       render={({ field: { value, onChange, onBlur } }) => (
                         <CustomTextField
                           fullWidth
-                          autoFocus
                           label="Email"
                           value={value}
                           onBlur={onBlur}
@@ -507,7 +504,6 @@ const Register = () => {
                         <CustomTextField
                           type="number"
                           fullWidth
-                          autoFocus
                           label="phone Number"
                           value={value}
                           onBlur={onBlur}
@@ -538,7 +534,7 @@ const Register = () => {
                       render={({ field: { value, onChange, onBlur } }) => (
                         <CustomTextField
                           fullWidth
-                          autoFocus
+                          type="text"
                           label="Job Title"
                           value={value}
                           onBlur={onBlur}
@@ -561,7 +557,8 @@ const Register = () => {
                       render={({ field: { value, onChange, onBlur } }) => (
                         <CustomTextField
                           fullWidth
-                          autoFocus
+                          autoComplete = "off"
+                          type="text"
                           label="Domain Name"
                           value={value}
                           onBlur={onBlur}

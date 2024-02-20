@@ -8,11 +8,12 @@ import { useAuth } from "src/hooks/useAuth";
 import { useState } from "react";
 import Link from "next/link";
 import { themesData } from "src/fileData/themes_data";
+import axios from "axios";
 
 const StoreThemes = () => {
-  const auth = useAuth();
-  auth.setPages("Themes");
-  const {id} = auth.user
+  const { user, setPages } = useAuth();
+  setPages("Themes");
+  const { id } = user;
 
   //** start handle select theme */
   const [theme, setTheme] = useState("one");
@@ -21,6 +22,21 @@ const StoreThemes = () => {
   };
 
   //** start handle select theme */
+
+  const api = "http://195.35.2.218/build/checkuser";
+  //** start handle send user date to backend and customize theme  */
+  const handleCustomizeTheme = () => {
+    axios
+      .post(api, user)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  //** end handle send user date to backend and customize theme  */
 
   return (
     <div style={{ width: "100%", padding: "0px 0px" }}>
@@ -63,12 +79,7 @@ const StoreThemes = () => {
             <p>Activitied date : _</p>
           </div>
         </Grid>
-        <Grid
-          item
-          className={styles.lastItem}
-          xs={12}
-
-        >
+        <Grid item className={styles.lastItem} xs={12}>
           <div className={styles.speedRate}>
             <span>0%</span>
             <div>
@@ -94,22 +105,21 @@ const StoreThemes = () => {
           flexWrap: "wrap",
         }}
       >
-
         {/* start handle select theme */}
-        {
-          themesData.map(({ id, name, image }, index) =>(
-            <Grid
-          item
-          xs={12}
-          sx={{ display: "flex", justifyContent: "space-between" }}
-        >
-          <MediaCard key={id} img={image} title={name} handleSelectTheme={handleSelectTheme}/>
-        </Grid>
-          )
-
-
-          )
-        }
+        {themesData.map(({ id, name, image }, index) => (
+          <Grid
+            item
+            xs={12}
+            sx={{ display: "flex", justifyContent: "space-between" }}
+          >
+            <MediaCard
+              key={id}
+              img={image}
+              title={name}
+              handleSelectTheme={handleSelectTheme}
+            />
+          </Grid>
+        ))}
 
         <grid item xs={12} className={styles.themeSelected}>
           <grid item xs={12} className={styles.theme}>
@@ -118,9 +128,14 @@ const StoreThemes = () => {
           </grid>
           <grid item xs={12} className={styles.theme}>
             <grid item xs={12}>
-              <Link href="http://195.35.2.218/build/builder/lara/t/2/">
-                <button className={styles.customizeBtn} >Customize</button>
-              </Link>
+              {/* <Link href="http://195.35.2.218/build/builder/lara/t/2/"> */}
+              <button
+                className={styles.customizeBtn}
+                onClick={handleCustomizeTheme}
+              >
+                Customize
+              </button>
+              {/* </Link> */}
             </grid>
           </grid>
         </grid>
@@ -130,3 +145,4 @@ const StoreThemes = () => {
 };
 
 export default StoreThemes;
+

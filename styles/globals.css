@@ -68,3 +68,14 @@ code[class*="language-"] {
   background-color: #0370a3b4 !important;
   color: #fff !important;
 }
+
+
+.MuiOutlinedInput-input {
+  padding: 8.5px 13px !important;
+  color: #010101 !important;
+  border-radius: 2px !important;
+}
+.MuiInputBase-input {
+
+  color: #010101 !important;
+}

@@ -121,8 +121,26 @@ const navigation = () => {
 
     {
       title: "Setting",
-      icon: setting,
-      path: "/setting",
+      icon: crmIcon,
+      activeIcon: crmIconActive,
+      children: [
+        {
+          title: "Team members",
+          path: "/setting/team",
+        },
+        {
+          title: "Roles & Permissions",
+          path: " /setting/roles",
+        },
+        {
+          title: "Leads",
+          path: " /setting/leads",
+        },
+        {
+          title: "Tasks",
+          path: " /setting/tasks",
+        },
+      ],
     },
     {
       title: "Help and Support",

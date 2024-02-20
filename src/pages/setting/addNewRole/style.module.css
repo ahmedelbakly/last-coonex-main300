@@ -11,7 +11,7 @@
   border-radius: 10px;
   border: 1px solid #e2e2e2;
 
-  & .cmsPermission {
+  & .section {
     width: 100%;
 
     & .header {
@@ -19,9 +19,12 @@
       justify-content: space-between;
       align-items: center;
       width: 100%;
-      height: 66px;
+      height: 50px;
       border: 1px solid #e2e2e2;
-      background: #f7f8f8;
+      /* background: #f7f8f8; */
+      background-color: rgb(1, 19, 67);
+      color: #fff;
+      border-radius: 8px 8px 0px 0px;
       padding: 0px 20px;
 
       & .text {
@@ -31,7 +34,7 @@
     }
   }
 
-  & .content {
+  & .permissionData {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -39,6 +42,8 @@
     padding: 20px;
     border: 1px solid #e2e2e2;
     border-radius: 0px 0px 8px 8px;
+    transition: all 0.3s linear;
+
 
     & .check {
       display: flex;
@@ -60,12 +65,13 @@
       justify-content: flex-start;
       flex-direction: column;
       gap: 10px;
+      margin-bottom: 10px;
 
       & .mainLabel {
         font-size: 14px;
         font-style: normal;
         font-weight: 400;
-        color: #3d3d3d;
+        color: #050505;
       }
       & .checks {
         display: flex;
@@ -79,10 +85,44 @@
           align-items: center;
           justify-content: center;
           gap: 10px;
-          border: 1px solid #e2e2e2;
-          padding: 5px 10px;
-          border-radius: 5px;
-          background-color: #fafbfb;
+          color: #040015;
+
+
+
+
+        }
+      }
+    }
+    & .multiCheckRow {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      flex-direction: row !important;
+      gap: 10px;
+      margin-bottom: 5px;
+
+      & .mainLabel {
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        color: #050505;
+        flex-grow: 1;
+      }
+      & .checks {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 30px;
+
+
+        & .multiCheckItem {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 10px;
+          color: #040015;
+
+
 
 
         }
@@ -90,7 +130,18 @@
     }
   }
 
+  & .hide {
+    height: 0px !important;
+    overflow: hidden !important;
+    transition: all 0.3s linear;
 
+  }
+  & .hide60 {
+    height: 40px !important;
+    overflow-y: hidden !important;
+    transition: all 0.3s linear;
+
+  }
 }
 
 .nextAndPrev {
