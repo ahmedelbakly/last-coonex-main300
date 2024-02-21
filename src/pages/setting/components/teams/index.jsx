@@ -6,9 +6,7 @@ import Link from "next/link";
 import EnhancedTable from "../table";
 import { ConfirmOverlay, SuccessOverlay } from "src/@core/components/overlays";
 
-const Roles = ({
-  rows,headCells
-}) => {
+const Teams = ({ rows, headCells }) => {
   const [deleteAll, setDeleteAll] = useState(false);
   const [successOverlay, setSuccessOverlay] = useState(false);
   const [confirmOverlayAll, setConfirmOverlayAll] = useState(false);
@@ -62,7 +60,7 @@ const Roles = ({
       {/* start overLay delete all Confirm  */}
       {confirmOverlayAll && (
         <ConfirmOverlay
-          message={"Do you want to delete all Roles?"}
+          message={"Do you want to delete all Member?"}
           setState={setConfirmOverlayAll}
           successSetState={setSuccessOverlay}
           func={handleDeleteAllProperty}
@@ -72,7 +70,7 @@ const Roles = ({
       {/* start overLay delete all Confirm  */}
       {confirmOverlayOne && (
         <ConfirmOverlay
-          message={"Do you want to delete this role?"}
+          message={"Do you want to delete this Member?"}
           setState={setConfirmOverlayOne}
           successSetState={setSuccessOverlay}
           func={handleDeleteOneProperty}
@@ -92,8 +90,8 @@ const Roles = ({
             Delete All
           </button>
         ) : (
-          <Link href={"/setting/roles/addNewRole"}>
-            <button className={StyleSheet.addBtn}>Add New Role</button>
+          <Link href={"/setting/team/addNewMember"}>
+            <button className={StyleSheet.addBtn}>Add New Member</button>
           </Link>
         )}
       </div>
@@ -103,10 +101,10 @@ const Roles = ({
         handleShowDeleteOneConfirm={handleShowDeleteOneConfirm}
         rows={rows}
         headCells={headCells}
-        editRoute = "/setting/roles/editRole/"
+        editRoute={"/setting/team/editMember/"}
       />
     </div>
   );
 };
 
-export default Roles;
+export default Teams;

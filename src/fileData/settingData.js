@@ -5,22 +5,56 @@
 export const mainList = [
   {
     name: "Team members",
-    stateValue: "teamMembers",
+    stateValue: "team",
   },
 
   {
     name: "Roles & Permissions",
-    stateValue: "adminRole",
+    stateValue: "roles",
   },
   {
     name: "leads",
     stateValue: "leads",
-    children: true
+    children: [
+      {
+        name: "Categories",
+        stateValue: "categories",
+      },
+      {
+        name: "Lead Status",
+        stateValue: "leadStatus",
+      },
+      {
+        name: "Lead Source",
+        stateValue: "leadSource",
+      },
+      {
+        name: "Web Forms",
+        stateValue: "webForms",
+      },
+    ],
   },
   {
     name: "Tasks",
     stateValue: "tasks",
-    children: true
+    children: [
+      {
+        name: "Categories",
+        stateValue: "categories",
+      },
+      {
+        name: "Lead Status",
+        stateValue: "leadStatus",
+      },
+      {
+        name: "Lead Source",
+        stateValue: "leadSource",
+      },
+      {
+        name: "Web Forms",
+        stateValue: "webForms",
+      },
+    ],
   },
 ];
 

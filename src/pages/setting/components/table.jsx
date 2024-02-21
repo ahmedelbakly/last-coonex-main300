@@ -23,31 +23,7 @@ import FilterListIcon from "@mui/icons-material/FilterList";
 import { visuallyHidden } from "@mui/utils";
 import { Pending } from "@mui/icons-material";
 import { deleteIcon, editIcon } from "../../../fileData/settingData";
-
-function createData(id, roleName, creationDate, status) {
-  return {
-    id,
-    roleName,
-    creationDate,
-    status,
-  };
-}
-
-const rows = [
-  createData(1, "Developer", "12/12/2023", "active"),
-  createData(2, "Developer", "12/12/2023", "inactive"),
-  createData(3, "Developer", "12/12/2023", "active"),
-  createData(4, "Developer", "12/12/2023", "inactive"),
-  createData(5, "Developer", "12/12/2023", "active"),
-  createData(6, "Developer", "12/12/2023", "inactive"),
-  createData(7, "Developer", "12/12/2023", "active"),
-  createData(8, "Developer", "12/12/2023", "inactive"),
-  createData(9, "Developer", "12/12/2023", "inactive"),
-  createData(10, "Developer", "12/12/2023", "active"),
-  createData(11, "Developer", "12/12/2023", "active"),
-  createData(12, "Developer", "12/12/2023", "active"),
-  createData(13, "Developer", "12/12/2023", "active"),
-];
+import Link from "next/link";
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -84,33 +60,6 @@ function stableSort(array, comparator) {
   return stabilizedThis.map((el) => el[0]);
 }
 
-const headCells = [
-  {
-    id: "role",
-    numeric: false,
-    disablePadding: true,
-    label: " Role Name",
-  },
-  {
-    id: "createdAt",
-    numeric: true,
-    disablePadding: false,
-    label: "Creation date",
-  },
-  {
-    id: "status",
-    numeric: true,
-    disablePadding: false,
-    label: "Status",
-  },
-  {
-    id: "action",
-    numeric: true,
-    disablePadding: false,
-    label: "Actions",
-  },
-];
-
 function EnhancedTableHead(props) {
   const {
     onSelectAllClick,
@@ -119,6 +68,7 @@ function EnhancedTableHead(props) {
     numSelected,
     rowCount,
     onRequestSort,
+    headCells,
   } = props;
   const createSortHandler = (property) => (event) => {
     onRequestSort(event, property);
@@ -221,6 +171,9 @@ EnhancedTableToolbar.propTypes = {
 export default function EnhancedTable({
   handleDeleteAll,
   handleShowDeleteOneConfirm,
+  rows,
+  headCells,
+  editRoute,
 }) {
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState("calories");
@@ -298,7 +251,12 @@ export default function EnhancedTable({
         {/* <EnhancedTableToolbar numSelected={selected.length} /> */}
         <TableContainer>
           <Table
-            sx={{ minWidth: 500, overflowX: "scroll",border:"2px solid #e2e2e2",borderRadius:'20px' }}
+            sx={{
+              minWidth: 500,
+              overflowX: "scroll",
+              border: "2px solid #e2e2e2",
+              borderRadius: "20px",
+            }}
             aria-labelledby="tableTitle"
             size={dense ? "small" : "medium"}
           >
@@ -310,6 +268,7 @@ export default function EnhancedTable({
               onRequestSort={handleRequestSort}
               rowCount={rows.length}
               handleDeleteAll={handleDeleteAll}
+              headCells={headCells}
             />
             <TableBody>
               {visibleRows.map((row, index) => {
@@ -366,27 +325,28 @@ export default function EnhancedTable({
                         {row.status}
                       </button>
                     </TableCell>
-                    <TableCell
-                      align="center"
-
-                    >
-                      <div  style={{
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        gap: "10px",
-                        height: "100%",
-                        width: "100%",
-                      }}>
-                        <button
-                          style={{
-                            background: "transparent",
-                            border: "none",
-                            cursor: "pointer",
-                          }}
-                        >
-                          {editIcon}
-                        </button>
+                    <TableCell align="center">
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          gap: "10px",
+                          height: "100%",
+                          width: "100%",
+                        }}
+                      >
+                        <Link href={`${editRoute} ${row.id}`} >
+                          <button
+                            style={{
+                              background: "transparent",
+                              border: "none",
+                              cursor: "pointer",
+                            }}
+                          >
+                            {editIcon}
+                          </button>
+                        </Link>
                         <button
                           style={{
                             background: "transparent",

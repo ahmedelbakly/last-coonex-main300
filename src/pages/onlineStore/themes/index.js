@@ -128,14 +128,14 @@ const StoreThemes = () => {
           </grid>
           <grid item xs={12} className={styles.theme}>
             <grid item xs={12}>
-              {/* <Link href="http://195.35.2.218/build/builder/lara/t/2/"> */}
-              <button
-                className={styles.customizeBtn}
-                onClick={handleCustomizeTheme}
-              >
-                Customize
-              </button>
-              {/* </Link> */}
+              <Link href="http://195.35.2.218/build/builder/lara/t/2/">
+                <button
+                  className={styles.customizeBtn}
+                  onClick={handleCustomizeTheme}
+                >
+                  Customize
+                </button>
+              </Link>
             </grid>
           </grid>
         </grid>
@@ -145,4 +145,3 @@ const StoreThemes = () => {
 };
 
 export default StoreThemes;
-

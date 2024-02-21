@@ -6,9 +6,7 @@ import Link from "next/link";
 import EnhancedTable from "../table";
 import { ConfirmOverlay, SuccessOverlay } from "src/@core/components/overlays";
 
-const Roles = ({
-  rows,headCells
-}) => {
+const Roles = () => {
   const [deleteAll, setDeleteAll] = useState(false);
   const [successOverlay, setSuccessOverlay] = useState(false);
   const [confirmOverlayAll, setConfirmOverlayAll] = useState(false);
@@ -92,7 +90,7 @@ const Roles = ({
             Delete All
           </button>
         ) : (
-          <Link href={"/setting/roles/addNewRole"}>
+          <Link href={"/setting/addNewRole"}>
             <button className={StyleSheet.addBtn}>Add New Role</button>
           </Link>
         )}
@@ -101,9 +99,6 @@ const Roles = ({
       <EnhancedTable
         handleDeleteAll={handleDeleteAll}
         handleShowDeleteOneConfirm={handleShowDeleteOneConfirm}
-        rows={rows}
-        headCells={headCells}
-        editRoute = "/setting/roles/editRole/"
       />
     </div>
   );

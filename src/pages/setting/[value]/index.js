@@ -5,20 +5,33 @@ import { useState } from "react";
 import { mainList, rightIcon } from "../../../fileData/settingData";
 import { useAuth } from "src/hooks/useAuth";
 import { FaChevronRight } from "react-icons/fa6";
-import { ConfirmOverlay, SuccessOverlay } from "src/@core/components/overlays";
 import { useRouter } from "next/router";
 import Roles from "../components/roles";
+import {
+  rolesRows,
+  rolesHeadCells,
+} from "../../../fileData/setting_data/roles_data";
+import Teams from "../components/teams";
+import { useEffect } from "react";
 
 const Settings = () => {
   const router = useRouter();
   const { value } = router.query;
-
-  const [page, setPage] = useState("adminRole");
-
+  const [page, setPage] = useState(value);
   const auth = useAuth();
   const { setProperty, property, setPages } = auth;
   setPages("Settings");
+  useEffect(() => {
+    if (value) {
+      setPage(value);
+    }
+  }, [value]);
+  console.log("====================================", mainList);
 
+  //** handle change route** */
+  const handleChangeRoute = (value) => {
+    router.push(`/setting/${value}`);
+  };
   return (
     <Grid
       container-full
@@ -45,7 +58,7 @@ const Settings = () => {
           flexWrap: "wrap",
           minHeight: "min-content",
           borderRight: "solid 1px #E2E2E2",
-          padding: "20px 0px",
+          padding: "20px 20px",
           border: "1px solid #E2E2E2",
           borderRadius: "10px",
         }}
@@ -53,15 +66,39 @@ const Settings = () => {
         {mainList.map((item, index) => (
           <div
             key={index}
-            className={
-              page === item.stateValue
-                ? StyleSheet.itemSelected
-                : StyleSheet.item
-            }
-            onClick={() => setPage(item.stateValue)}
+            className={item.children ? StyleSheet.itemParent : " notParent"}
           >
-            <h5>{item.name}</h5>
-            {item.children && <FaChevronRight />}
+            <div
+              key={index}
+              className={
+                page === item.stateValue
+                  ? StyleSheet.itemSelected
+                  : StyleSheet.item
+              }
+              onClick={() => handleChangeRoute(item.stateValue)}
+            >
+              <h5>{item.name}</h5>
+              {item.children && <FaChevronRight />}
+            </div>
+
+            {/*item.children && value === item.stateValue && (
+              <ul className={StyleSheet.subitemContainer}>
+                {" "}
+                {item.children.map((child, index) => (
+                  <li
+                    key={index}
+                    item
+                    className={StyleSheet.subitem}
+                    onClick={() => {
+                      setProperty(item.stateValue);
+                      router.push("/setting/" + child.stateValue);
+                    }}
+                  >
+                    {child.name}
+                  </li>
+                ))}
+              </ul>
+                  )*/}
           </div>
         ))}
       </Grid>
@@ -77,7 +114,12 @@ const Settings = () => {
           flexDirection: "column",
         }}
       >
-        {value === "roles" && <Roles />}
+        {page === "roles" && (
+          <Roles rows={rolesRows} headCells={rolesHeadCells} />
+        )}
+        {page === "team" && (
+          <Teams rows={rolesRows} headCells={rolesHeadCells} />
+        )}
       </Grid>
     </Grid>
   );
