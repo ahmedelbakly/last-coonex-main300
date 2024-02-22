@@ -13,7 +13,7 @@ import axios from "axios";
 const StoreThemes = () => {
   const { user, setPages } = useAuth();
   setPages("Themes");
-  const { id } = user;
+  const { email } = user;
 
   //** start handle select theme */
   const [theme, setTheme] = useState("one");
@@ -128,7 +128,7 @@ const StoreThemes = () => {
           </grid>
           <grid item xs={12} className={styles.theme}>
             <grid item xs={12}>
-              <Link href="http://195.35.2.218/build/builder/lara/t/2/">
+              <Link href={`https://harajx.com/thebuilder/checkuser/${email}`}>
                 <button
                   className={styles.customizeBtn}
                   onClick={handleCustomizeTheme}
@@ -145,3 +145,5 @@ const StoreThemes = () => {
 };
 
 export default StoreThemes;
+
+//*https://harajx.com/thebuilder/checkuser/ahmed@gmail.com */
