@@ -4,14 +4,18 @@ import crmIcon from "../../../public/images/crm/crm.png";
 import crmIconActive from "../../../public/images/crm/crmActive.png";
 import webSiteIcon from "../../../public/images/crm/online-store-not.png";
 import webSiteIconActive from "../../../public/images/crm/online-store -active.png";
-import AdvertIcon from "../../../public/images/cms/advertiseIcon.png";
+import AdvertIcon from "../../../public/images/crm/megaphone.png";
+import AdvertActive from "../../../public/images/crm/megaphoneActive.png";
 import leadIcon from "../../../public/images/crm/leads-icon.png";
 import leadIconActive from "../../../public/images/crm/leads-icon-active.png";
-import analyticsIcon from "../../../public/images/cms/analiyicIcon.png";
 import dashIcon from "../../../public/images/crm/dashboard.png";
-import dashIconActive from "../../../public/images/crm/dashboard-active.png";
-import setting from "../../../public/images/cms/setting.svg";
-import helpIcon from "../../../public/images/cms/helpIcon2.svg";
+import dashIconActive from "../../../public/images/crm/dashboardActive.png";
+import helpIcon from "../../../public/images/crm/question.png";
+import helpActive from "../../../public/images/crm/questionActive.png";
+import analyticsActive from "../../../public/images/crm/analysisActive.png";
+import analytics from "../../../public/images/crm/analysis.png";
+import setting from "../../../public/images/crm/settings.png";
+import settingActive from "../../../public/images/crm/settingsActive.png";
 
 const navigation = () => {
   return [
@@ -66,7 +70,8 @@ const navigation = () => {
     },
     {
       title: "Analytics",
-      icon: analyticsIcon,
+      icon: analytics,
+      activeIcon: analyticsActive,
       path: "/analytics",
     },
 
@@ -76,12 +81,9 @@ const navigation = () => {
     {
       title: "Advertising",
       icon: AdvertIcon,
-      children: [
-        {
-          title: "Themes",
-          path: "/onlineStore/themes",
-        },
-      ],
+      activeIcon: AdvertActive,
+      path: "/advertising",
+      type: "asGroup",
     },
 
     {
@@ -121,8 +123,9 @@ const navigation = () => {
 
     {
       title: "Setting",
-      icon: crmIcon,
-      activeIcon: crmIconActive,
+      icon: setting,
+      activeIcon: settingActive,
+
       children: [
         {
           title: "Team members",
@@ -145,7 +148,9 @@ const navigation = () => {
     {
       title: "Help and Support",
       icon: helpIcon,
+      activeIcon: helpActive,
       path: "/helpSupport",
+      type: "asGroup",
     },
 
     //   {
