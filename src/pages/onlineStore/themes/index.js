@@ -129,7 +129,7 @@ const StoreThemes = () => {
           </grid>
           <grid item xs={12} className={styles.theme}>
             <grid item xs={12}>
-              {/* <Link href="http://195.35.2.218/build/builder/lara/t/2/"> */}
+             {/* <Link href="http://harajx.com/build/checkuser/moe1@hotmail.com"> */}
               <button
                 className={styles.customizeBtn}
                 onClick={handleCustomizeTheme}
