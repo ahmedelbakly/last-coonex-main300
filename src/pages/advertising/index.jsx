@@ -5,7 +5,7 @@ const Analytics = () => {
     <div>
       <h1>Analytics</h1>
       <p>
-        This page will display any advertising data that is available to the app.
+        This page will display any advertising data that is available to the app!.
       </p>
     </div>
   );
