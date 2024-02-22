@@ -73,6 +73,7 @@ const navigation = () => {
       icon: analytics,
       activeIcon: analyticsActive,
       path: "/analytics",
+      type: "asGroup",
     },
 
     {
