@@ -32,7 +32,7 @@ const selectData = [
 ];
 const AddNewRole = () => {
    //** access params value from url */
-   
+
 
 
   const [showGeneralPermission, setShowGeneralPermission] = useState(false);
@@ -126,7 +126,7 @@ const AddNewRole = () => {
         <SuccessOverlay
           setState={setShowSuccessLay}
           message={"Role added successfully"}
-          route={"/setting"}
+          route={"/setting/roles"}
         />
       )}
       {/* START Success Overlay SECTION */}

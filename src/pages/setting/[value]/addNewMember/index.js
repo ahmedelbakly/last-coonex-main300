@@ -102,8 +102,9 @@ const AddNewMember = () => {
       {/* start overLay Success */}
       {overLaySuccess && (
         <SuccessOverlay
-          message={"Add New Task successfully "}
+          message={"Add New Member successfully "}
           setState={setOverLaySuccess}
+          route={ "/setting/team"}
         />
       )}
 
