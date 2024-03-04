@@ -101,7 +101,7 @@ const StoreThemes = () => {
           display: "flex",
           width: "100%",
           justifyContent: "space-between",
-          gap: "20px",
+          gap: "5px",
           flexWrap: "wrap",
         }}
       >
@@ -110,7 +110,8 @@ const StoreThemes = () => {
           <Grid
             item
             xs={12}
-            sx={{ display: "flex", justifyContent: "space-between" }}
+            width={"32%"}
+
           >
             <MediaCard
               key={id}
@@ -128,7 +129,11 @@ const StoreThemes = () => {
           </grid>
           <grid item xs={12} className={styles.theme}>
             <grid item xs={12}>
-              <Link href={`https://harajx.com/thebuilder/checkuser/${email}`}>
+              <Link
+                href={`https://harajx.com/thebuilder/checkuser/${email}`}
+                target="_blank"
+                rel="noreferrer"
+              >
                 <button
                   className={styles.customizeBtn}
                   onClick={handleCustomizeTheme}

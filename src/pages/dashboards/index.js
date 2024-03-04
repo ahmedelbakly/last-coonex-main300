@@ -13,6 +13,7 @@ import VideoSlide from "./components/video.js";
 import { useState } from "react";
 import { useAuth } from "src/hooks/useAuth";
 import DateCalendarValue from "src/@core/components/calender/Calender";
+import ChartjsLineChart from "src/views/charts/chartjs/ChartjsLineChart";
 
 const rentIcon = (
   <svg
@@ -172,7 +173,7 @@ const HomePage = () => {
             </button>
           </Grid>
           <Grid item className={styleSheet.chart1}>
-            <Image src={Chart2} alt="Chart2" />
+          <ChartjsLineChart/>
           </Grid>
         </Grid>
         <Grid item xs={4.25} className={styleSheet.item2}>

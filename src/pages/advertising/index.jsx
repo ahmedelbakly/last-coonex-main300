@@ -12,3 +12,6 @@ const Analytics = () => {
 };
 
 export default Analytics;
+
+
+/* C:\Windows\System32\drivers\etc\hosts*/

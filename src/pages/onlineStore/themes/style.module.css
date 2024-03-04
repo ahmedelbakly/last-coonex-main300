@@ -43,6 +43,11 @@
 
 /* /////////////////////////////////// */
 /* speed styles */
+
+.speed {
+  padding-bottom: 20px;
+  border-bottom: 1px solid #e2e2e2;
+}
 .container .speed > p {
   color: #3d3d3d;
   font-size: 20px;
@@ -62,12 +67,17 @@
 
 /* // */
 /* lastItem */
-
+.lastItem {
+ display: flex;
+ justify-content: space-between;
+  align-items: center;
+  row-gap: 10px;
+}
 
 
 .speedRate {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   gap: 10px;
 }
@@ -84,6 +94,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  border: 3px solid #1DB2FF;
+  border-left-color:#fff ;
 }
 .speedRate div {
   display: flex;

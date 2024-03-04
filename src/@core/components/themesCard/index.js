@@ -14,7 +14,7 @@ export default function MediaCard({img,title,handleSelectTheme
 
 }) {
   return (
-    <Card className={StyleSheet.card} sx={{ maxWidth: 290,height: 295,position:"relative"
+    <Card className={StyleSheet.card} sx={{ maxWidth: "100%" , minWidth:260,height: 310,position:"relative"
     ,border:"2px solid #E2E8F0",
     }} >
 

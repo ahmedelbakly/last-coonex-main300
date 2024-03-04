@@ -143,14 +143,13 @@ const AddPropertyPage = () => {
   };
   // end handle new property data
 
-  const api = "http://localhost:3001/user/property/";
+  const api = "http://harajx.com/thebuilder/save_property/";
 
   // handleSubmit property
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    console.log(api);
     console.log(allData);
-   
 
     try {
       const res = await axios.post(api, allData);
@@ -160,10 +159,10 @@ const AddPropertyPage = () => {
       console.log(error);
     }
   };
-  console.log(property);
+
   // end handle new property data
   // handle delete properties
-  const deleteApi = "http://localhost:3001/user/property/";
+  const deleteApi = "";
 
   //** handle upload image*/
   const uploadImages = (e) => {
@@ -283,3 +282,4 @@ const AddPropertyPage = () => {
 };
 
 export default AddPropertyPage;
+
