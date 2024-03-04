@@ -172,9 +172,7 @@ const HomePage = () => {
               <IoIosArrowForward />
             </button>
           </Grid>
-          <Grid item className={styleSheet.chart1}>
-          <ChartjsLineChart/>
-          </Grid>
+         
         </Grid>
         <Grid item xs={4.25} className={styleSheet.item2}>
           <Grid item className={styleSheet.countProperty}>
