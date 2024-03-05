@@ -152,7 +152,7 @@ const AddPropertyPage = () => {
     console.log(allData);
 
     try {
-      const res = await axios.post(api, allData);
+      const res = await axios.post(api, {allData,email:auth.user.email});
       console.log(res.data);
       auth.setUser(res.data);
     } catch (error) {
