@@ -143,7 +143,7 @@ const AddPropertyPage = () => {
   };
   // end handle new property data
 
-  const api = "http://harajx.com/thebuilder/save_property/";
+  const api = "http://harajx.com:81/api/save_property";
 
   // handleSubmit property
   const handleSubmit = async (e) => {
@@ -282,4 +282,3 @@ const AddPropertyPage = () => {
 };
 
 export default AddPropertyPage;
-
