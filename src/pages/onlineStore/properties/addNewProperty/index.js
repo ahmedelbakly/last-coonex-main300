@@ -122,7 +122,7 @@ const AddPropertyPage = () => {
       setPropertyDetails({
         ...propertyDetails,
         extraInformation: {
-          ...propertyDetails.extraInformation,
+          ...propertyDetails.extraInapiformation,
           amenities: propertyDetails.extraInformation.amenities.filter(
             (item) => item !== value
           ),
@@ -143,7 +143,11 @@ const AddPropertyPage = () => {
   };
   // end handle new property data
 
+<<<<<<< HEAD
   const api = "http://harajx.com:81/api/save_property";
+=======
+  const api = "http://195.35.2.218:81/api/save_property";
+>>>>>>> aa86e2d (api)
 
   // handleSubmit property
   const handleSubmit = async (e) => {
