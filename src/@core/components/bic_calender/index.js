@@ -59,11 +59,12 @@ const MyCalendar = ({ handleShowAdd, handleShowAllEvents }) => {
     return (
       <div
         style={{
-          height: "55px",
-          background: "#fff",
-          color: "#000",
+          height: "24px",
+          background:" rgb(255 79 9)",
+          color: "#fff",
           width: "100%",
-          padding: "5px",
+          padding: "2px",
+          fontSize: "14px"
         }}
       onClick={handleShowAllEvents} >
        {event.name} <br /> <small>{event.description}</small>{" "}
