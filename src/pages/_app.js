@@ -56,6 +56,7 @@ import 'src/iconify-bundle/icons-bundle-react'
 
 // ** Global css styles
 import '../../styles/globals.css'
+import { DataProvider } from 'src/context/DataContext'
 // import { store } from 'src/redux/store'
 
 const clientSideEmotionCache = createEmotionCache()
@@ -109,7 +110,7 @@ const App = props => {
           <meta name='keywords' content='Material Design, MUI, Admin Template, React Admin Template' />
           <meta name='viewport' content='initial-scale=1, width=device-width' />
         </Head>
-
+        <DataProvider>
         <AuthProvider>
           <SettingsProvider {...(setConfig ? { pageSettings: setConfig() } : {})}>
             <SettingsConsumer>
@@ -130,6 +131,7 @@ const App = props => {
             </SettingsConsumer>
           </SettingsProvider>
         </AuthProvider>
+        </DataProvider>
       </CacheProvider>
     </Provider>
   )

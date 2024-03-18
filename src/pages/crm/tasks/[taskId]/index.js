@@ -20,9 +20,12 @@ import { IoIosClose } from "react-icons/io";
 import Calendar from "src/store/apps/calendar";
 import CustomDate from "src/@core/components/cutomDate/CustomDate";
 import { fi } from "date-fns/locale";
-import { rows } from "../../../../fileData/tasksData";
+import { priorityOptionData, relatedToOption, rows, statusOption } from "../../../../fileData/tasksData";
 import { useEffect } from "react";
-import Filter from "../components/filter/filter";
+import { useData } from "src/hooks/useData";
+import { useParams } from "next/navigation";
+import { useRouter } from "next/router";
+import axios from "axios";
 
 //* leads test data */
 const assignToData = [
@@ -40,17 +43,22 @@ const financeOptionData = [
 const EditTask = () => {
   const auth = useAuth();
   auth.setPages("Edit Task");
+  // store project data
+  const { tasks, setTasks } = useData();
+  // access params from url
+  const router = useRouter();
+  const { taskId} = router.query;
 
   //** states to handle show success overlay  */
   const [overLaySuccess, setOverLaySuccess] = useState(false);
 
   //** state as object to handle data of new lead */
 
-  const [addTaskData, setAddTaskData] = useState({
-    taskName: "",
+  const [editTaskData, setEditTaskData] = useState({
+    name: "",
     assignTo: "",
     status: "",
-    startedDate: "",
+    startDate: "",
     description: "",
     endDate: "",
     relatedTo: "",
@@ -60,9 +68,9 @@ const EditTask = () => {
   });
   //** filter task data by taskId to edit it*/
   useEffect(() => {
-    setAddTaskData(rows.filter((row) => row.taskId === auth.taskId)[0]);
-  }, [auth.taskId]);
-
+    setEditTaskData(tasks.find((task) => task.id === taskId));
+  }, [taskId]);
+  console.log(editTaskData);
   //**state to handle files  */
   const [files, setFiles] = useState(null);
 
@@ -75,13 +83,13 @@ const EditTask = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    setAddTaskData({ ...addTaskData, [name]: value });
+    setEditTaskData({ ...editTaskData, [name]: value });
   };
 
   //*handle custom select */
   // handle custom select
   const handleCustomSelect = (selectedValue, selectName) => {
-    setAddTaskData((prev) => {
+    setEditTaskData((prev) => {
       return {
         ...prev,
         [selectName]: selectedValue,
@@ -97,7 +105,7 @@ const EditTask = () => {
   };
   //** handle date */
   const handleDate = (selectedDate, propertyName) => {
-    setAddTaskData((prev) => {
+    setEditTaskData((prev) => {
       return {
         ...prev,
         [propertyName]: selectedDate,
@@ -105,11 +113,22 @@ const EditTask = () => {
     });
   };
 
-  console.log(addTaskData);
-
   //**handle show success overlay */
   const handleShowOverlay = () => {
     setOverLaySuccess(!overLaySuccess);
+  };
+
+  // handle send data to api
+  const handleEditTask = () => {
+    axios
+      .put(`http://195.35.2.218:5000/api/task/${taskId}`, editTaskData)
+      .then(({ data }) => {
+        const { payload, message } = data;
+        if (message === "successfully") {
+          setTasks(payload);
+          setOverLaySuccess(true);
+        }
+      });
   };
 
   return (
@@ -121,6 +140,7 @@ const EditTask = () => {
         <SuccessOverlay
           message={"Edit Task successfully "}
           setState={setOverLaySuccess}
+          route={"/crm/tasks"}
         />
       )}
 
@@ -132,8 +152,8 @@ const EditTask = () => {
             <label>Task Name *</label>
             <input
               type="text"
-              name="taskName"
-              value={addTaskData.taskName}
+              name="name"
+              value={editTaskData.name}
               placeholder=" task name"
               onChange={handleChange}
             />
@@ -143,9 +163,9 @@ const EditTask = () => {
         {/**Start Related to */}
         <Grid item sx={{ flex: 1 }}>
           <CustomSelect
-            array={assignToData}
+            array={relatedToOption}
             fun={handleCustomSelect}
-            state={addTaskData.relatedTo}
+            state={editTaskData.relatedTo}
             label={"Related to"}
             selectName={"relatedTo"}
           />
@@ -158,7 +178,7 @@ const EditTask = () => {
           <CustomSelect
             array={assignToData}
             fun={handleCustomSelect}
-            state={addTaskData.assignTo}
+            state={editTaskData.assignTo}
             label={"Assign To"}
             selectName={"assignTo"}
           />
@@ -167,9 +187,9 @@ const EditTask = () => {
         {/**Start priority*/}
         <Grid item sx={{ flex: 1 }}>
           <CustomSelect
-            array={assignToData}
+            array={priorityOptionData}
             fun={handleCustomSelect}
-            state={addTaskData.priority}
+            state={editTaskData.priority}
             label={"Priority"}
             selectName={"priority"}
           />
@@ -180,7 +200,7 @@ const EditTask = () => {
         {/**Start Start Date*/}
         <Grid item sx={{ flex: 1 }}>
           <CustomDate
-            value={addTaskData.startedDate}
+            value={editTaskData.startDate?.split("T")[0]}
             label="Start Date"
             handleDate={handleDate}
             propertyName="startDate"
@@ -190,7 +210,7 @@ const EditTask = () => {
         {/**Start End Date*/}
         <Grid item sx={{ flex: 1 }}>
           <CustomDate
-            value={addTaskData.endDate}
+            value={editTaskData.endDate?.split("T")[0]}
             label="End Date"
             handleDate={handleDate}
             propertyName="endDate"
@@ -201,9 +221,9 @@ const EditTask = () => {
         {/**Start status*/}
         <Grid item sx={{ flex: 1 }} py={0}>
           <CustomSelect
-            array={propertyTypeTest}
+            array={statusOption}
             fun={handleCustomSelect}
-            state={addTaskData.status}
+            state={editTaskData.status}
             label={"Status"}
             selectName={"status"}
           />
@@ -252,7 +272,7 @@ const EditTask = () => {
           <label>Description</label>
           <textarea
             name="description"
-            value={addTaskData.description}
+            value={editTaskData.description}
             onChange={handleChange}
             placeholder="Description"
             rows={5}
@@ -265,7 +285,7 @@ const EditTask = () => {
         <Link href="/crm/tasks">
           <button>Cancel</button>
         </Link>
-        <button onClick={handleShowOverlay}>Save</button>
+        <button onClick={handleEditTask}>Save</button>
       </div>
     </Grid>
   );

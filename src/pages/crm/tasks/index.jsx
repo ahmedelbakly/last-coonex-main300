@@ -3,15 +3,14 @@ import React from "react";
 import { useAuth } from "src/hooks/useAuth";
 import StyleSheet from "./style.module.css";
 import SearchIcon from "@mui/icons-material/Search";
-
-import { IoIosAdd } from "react-icons/io";
-import { MdOutlineFileUpload } from "react-icons/md";
 import { useState } from "react";
-import { Filter1Outlined } from "@mui/icons-material";
 import { TbFilter } from "react-icons/tb";
-import TasksTable from "./components/table";
 import Link from "next/link";
 import Filter from "./components/filter/filter";
+import { useData } from "src/hooks/useData";
+import axios from "axios";
+import EnhancedTable from "./components/table";
+import EmptyData from "src/@core/components/EmptyData/EmptyData";
 
 const Tasks = () => {
   const [overLaySuccess, setOverLaySuccess] = useState(false);
@@ -21,15 +20,30 @@ const Tasks = () => {
   const [leadSourceValue, setLeadSourceValue] = useState("");
   //** state handle show filter */
   const [showFilter, setShowFilter] = useState(false);
+  const { Tasks, setTasks } = useData();
   //** method to handle show filter */
   const handleShowFilter = () => {
     setShowFilter(!showFilter);
   };
   //**////////////////////////////////////////////////////////// */
-
+  // useAuth context
   const { setPages } = useAuth();
   setPages("CRM Tasks");
-
+  // useData context
+  const { tasks } = useData();
+  console.log("#################", tasks);
+  const handleDeleteItem = (itemId, setConfirm, setSuccess) => {
+    axios
+      .delete(`http://195.35.2.218:5000/api/task/${itemId}`)
+      .then(({ data }) => {
+        const { payload, message } = data;
+        if (message === "successfully") {
+          setTasks(payload);
+          setConfirm(false);
+          setSuccess(true);
+        }
+      });
+  };
   return (
     <Grid container className={StyleSheet.container}>
       {/**start filter */}
@@ -61,9 +75,21 @@ const Tasks = () => {
           </Box>
         </div>
       </Grid>
-      <Grid item className={StyleSheet.TasksData}>
-        <TasksTable />
-      </Grid>
+      {/**start data table when tasks grater than 0 show the table otherwise show emptyData */}
+
+      {tasks.length > 0 ? (
+        <Grid item className={StyleSheet.TasksData}>
+          <EnhancedTable
+            rows={tasks}
+            setTasks={setTasks}
+            handleDeleteItem={handleDeleteItem}
+          />
+        </Grid>
+      ) : (
+        <Grid item className={StyleSheet.TasksData}>
+          <EmptyData message="No.tasks found, please add new task from add button" />
+        </Grid>
+      )}
     </Grid>
   );
 };

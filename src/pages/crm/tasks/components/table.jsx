@@ -21,7 +21,7 @@ import Switch from "@mui/material/Switch";
 import DeleteIcon from "@mui/icons-material/Delete";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import { visuallyHidden } from "@mui/utils";
-import { rows } from "../../../../fileData/tasksData";
+
 import StyleSheet from "../style.module.css";
 import { deleteIcon, editIcon } from "src/@core/leadsData/leadsSourceIcon";
 import avatar from "../../../../../public/images/cms/avatar.png";
@@ -30,7 +30,9 @@ import { useAuth } from "src/hooks/useAuth";
 import { useRouter } from "next/router";
 import { ConfirmOverlay, SuccessOverlay } from "src/@core/components/overlays";
 import { useState } from "react";
-import { set } from "nprogress";
+import { useData } from "src/hooks/useData";
+import axios from "axios";
+import Link from "next/link";
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -147,11 +149,11 @@ function EnhancedTableHead(props) {
             }}
           />
         </TableCell>
-        {headCells.map((headCell) => (
+        {headCells.map((headCell, index) => (
           <TableCell
             key={headCell.id}
             // align={headCell.numeric ? "right" : "left"}
-            align="left"
+            align={index === 7 ? "center" : "left"}
             padding={headCell.disablePadding ? "none" : "normal"}
             sortDirection={orderBy === headCell.id ? order : false}
           >
@@ -241,7 +243,7 @@ EnhancedTableToolbar.propTypes = {
   numSelected: PropTypes.number.isRequired,
 };
 
-export default function EnhancedTable() {
+const EnhancedTable = ({ rows, handleDeleteItem }) => {
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState("calories");
   const [selected, setSelected] = React.useState([]);
@@ -251,6 +253,8 @@ export default function EnhancedTable() {
   //** state to handle overlays */
   const [successOverlay, setSuccessOverlay] = useState(false);
   const [confirmOverlay, setConfirmOverlay] = useState(false);
+  const [id, setId] = useState("");
+
   //** handle Delete Confirm */
   const handleDeleteConfirm = () => {
     setConfirmOverlay(false);
@@ -261,13 +265,8 @@ export default function EnhancedTable() {
   };
 
   //** handle set task id */
-  const { setTaskId } = useAuth();
-  const router = useRouter();
 
-  const handleEditTask = (id) => {
-    setTaskId(id);
-    router.push(`/crm/tasks/editTask`);
-  };
+  const router = useRouter();
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
@@ -278,7 +277,7 @@ export default function EnhancedTable() {
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
       const newSelected = rows.map((n) => n.id);
-      setSelected(newSelected);
+      // setSelected(newSelected);
 
       return;
     }
@@ -301,7 +300,7 @@ export default function EnhancedTable() {
         selected.slice(selectedIndex + 1)
       );
     }
-    setSelected(newSelected);
+    // setSelected(newSelected);
   };
 
   const handleChangePage = (event, newPage) => {
@@ -339,6 +338,11 @@ export default function EnhancedTable() {
     }
   };
 
+  // handle delete item from table from api and update data state in table component
+  const api = "http://localhost:5000/api/task/:id";
+
+  console.log("################################", rows);
+
   return (
     <Box sx={{ width: "100%" }}>
       <Paper sx={{ width: "100%", mb: 2 }}>
@@ -353,11 +357,13 @@ export default function EnhancedTable() {
           <ConfirmOverlay
             message={"Do you want to delete this task?"}
             setState={setConfirmOverlay}
-            successSetState={setSuccessOverlay}
-            func={handleDeleteConfirm}
+            func={() =>
+              handleDeleteItem(id, setConfirmOverlay, setSuccessOverlay)
+            }
           />
         )}
         {/* <EnhancedTableToolbar numSelected={selected.length} /> */}
+
         <TableContainer>
           <Table
             sx={{ minWidth: "max-content", overflowX: "scroll" }}
@@ -373,7 +379,7 @@ export default function EnhancedTable() {
               rowCount={rows.length}
             />
             <TableBody>
-              {visibleRows.map((row, index) => {
+              {rows.map((row, index) => {
                 const isItemSelected = isSelected(row.id);
                 const labelId = `enhanced-table-checkbox-${index}`;
 
@@ -406,28 +412,29 @@ export default function EnhancedTable() {
                     >
                       <span className={StyleSheet.itemStyle}>
                         {" "}
-                        {row.taskId}
+                        {row.id?.slice(0, 5)}
                       </span>
                     </TableCell>
 
-                    <TableCell align="left" width={"300px"}>
-                      <span className={StyleSheet.taskName}>
-                        {row.taskName}
-                      </span>
+                    <TableCell align="left" width={"250px"}>
+                      <Link href={`/crm/tasks/${row.id}`}>
+                      <span className={StyleSheet.taskName}>{row.name}</span>
+                      </Link>
+
                     </TableCell>
-                    <TableCell align="left" width={"200px"}>
+                    <TableCell align="left" width={"170px"}>
                       <span className={StyleSheet.itemStyle}>
                         {" "}
-                        {row.startedDate}
+                        {row.startDate?.split("T")[0]}
                       </span>
                     </TableCell>
-                    <TableCell align="left" width={"200px"}>
+                    <TableCell align="left" width={"170px"}>
                       <span className={StyleSheet.itemStyle}>
                         {" "}
-                        {row.endDate}
+                        {row.endDate?.split("T")[0]}
                       </span>
                     </TableCell>
-                    <TableCell align="left" width={"300px"}>
+                    <TableCell align="left" width={"150px"}>
                       <span className={StyleSheet.taskName}>
                         {" "}
                         {row.relatedTo}
@@ -447,7 +454,7 @@ export default function EnhancedTable() {
                         </p>
                       </div>
                     </TableCell>
-                    <TableCell align="left" width={"200px"}>
+                    <TableCell align="left" width={"150px"}>
                       <button
                         style={{
                           border: `2px solid ${handleStatusColorAndBorder(
@@ -460,15 +467,22 @@ export default function EnhancedTable() {
                         {row.status}
                       </button>
                     </TableCell>
-                    <TableCell
-                      align="left"
-                      width={"200px"}
-                      className={StyleSheet.actions}
-                    >
-                      <button onClick={() => handleEditTask(row.taskId)}>
-                        {editIcon}
-                      </button>
-                      <button onClick={handleShowOverlay}>{deleteIcon}</button>
+                    <TableCell align="left" width={"200px"}>
+                      <div className={StyleSheet.actions}>
+                        <button
+                          onClick={() => router.push(`/crm/tasks/${row.id}`)}
+                        >
+                          {editIcon}
+                        </button>
+                        <button
+                          onClick={() => {
+                            handleShowOverlay();
+                            setId(row.id);
+                          }}
+                        >
+                          {deleteIcon}
+                        </button>
+                      </div>
                     </TableCell>
                   </TableRow>
                 );
@@ -501,4 +515,6 @@ export default function EnhancedTable() {
       />
     </Box>
   );
-}
+};
+
+export default EnhancedTable;

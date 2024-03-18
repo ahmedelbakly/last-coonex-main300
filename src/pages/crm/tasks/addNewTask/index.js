@@ -19,6 +19,8 @@ import {
   relatedToOption,
   statusOption,
 } from "../../../../fileData/tasksData";
+import axios from "axios";
+import { useData } from "src/hooks/useData";
 
 //* leads test data */
 const assignToData = [
@@ -34,26 +36,29 @@ const financeOptionData = [
 ];
 
 const AddNewLeads = () => {
+  // auth data
   const auth = useAuth();
   auth.setPages("CRM Add New Task");
+// // DATA
+const{ tasks, setTasks} = useData()
+
   const [overLaySuccess, setOverLaySuccess] = useState(false);
   const [emptyItem, setEmptyItem] = useState({});
   //** state as object to handle data of new lead */
   const [addTaskData, setAddTaskData] = useState({
-    taskName: "",
+    name: "",
     assignTo: "",
     status: "",
-    startDate: "",
+    startDate: null,
     description: "",
-    endDate: "",
+    endDate: null,
     relatedTo: "",
     priority: "",
-    preferPrice: "",
-    file: "",
+    adminId: auth.user.id.toString(),
   });
 
   const [files, setFiles] = useState(null);
-  const saveNewLeadApi = "http://localhost:3001/leads/new";
+  const addNewUrl = "http://195.35.2.218:5000/api/task";
 
   //////////////////////////////////////////////////////////////////////////////////////
   //* handle change file  */
@@ -101,6 +106,20 @@ const AddNewLeads = () => {
     setOverLaySuccess(!overLaySuccess);
   };
 
+  // handle submit to api addNewUrl
+  const handleAddTask = () => {
+    console.log(addTaskData);
+    axios.post(addNewUrl, addTaskData).then(({ data }) => {
+      const { payload, message,error} = data;
+      if(message === "successfully") {
+        setOverLaySuccess(true);
+        setTasks(payload)
+
+      }
+
+  })
+  };
+console.log(tasks);
   return (
     <Grid
       container
@@ -113,6 +132,7 @@ const AddNewLeads = () => {
         <SuccessOverlay
           message={"Add New Task successfully "}
           setState={setOverLaySuccess}
+          route={"/crm/tasks"}
         />
       )}
 
@@ -124,7 +144,7 @@ const AddNewLeads = () => {
             <label>Task Name *</label>
             <input
               type="text"
-              name="taskName"
+              name="name"
               value={addTaskData.taskName}
               placeholder=" task name"
               onChange={handleChange}
@@ -257,7 +277,13 @@ const AddNewLeads = () => {
         <Link href="/crm/tasks">
           <button>Cancel</button>
         </Link>
-        <button onClick={handleShowOverlay}>Save</button>
+        <button
+          onClick={() => {
+            handleAddTask();
+          }}
+        >
+          Save
+        </button>
       </div>
     </Grid>
   );

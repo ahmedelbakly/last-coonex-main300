@@ -2,7 +2,20 @@
 .container {
   height: 600px;
   width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column !important;
+  align-items: center;
+  gap: 70px;
+
 }
+
+.searchAndAdd {
+  height: 50px;
+
+
+}
+
 
 .subTitle {
   display: flex;
@@ -158,6 +171,15 @@
 /* actions buttons style */
 .actions {
  padding-left: 20px;
+ width: 100%;
+ display: flex;
+ align-items: center;
+ justify-content:flex-start;
+ padding-left: 25%;
+
+
+
+
 }
 .actions button {
 border: none;

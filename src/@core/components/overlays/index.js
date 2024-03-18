@@ -79,8 +79,10 @@ export const ConfirmOverlay = ({
           className={StyleSheet.btn}
           onClick={() => {
             func();
-            setState(false);
-            successSetState(true);
+            if (successSetState) {
+              setState(false);
+              successSetState(true);
+            }
           }}
         >
           Confirm
