@@ -125,7 +125,7 @@ const EditTask = () => {
       .then(({ data }) => {
         const { payload, message } = data;
         if (message === "successfully") {
-          setTasks(payload);
+          setTasks(payload.filter((item) => item?.adminId === (auth.user.id).toString()));
           setOverLaySuccess(true);
         }
       });
