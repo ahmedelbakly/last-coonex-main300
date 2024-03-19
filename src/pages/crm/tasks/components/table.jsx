@@ -412,7 +412,7 @@ const EnhancedTable = ({ rows, handleDeleteItem }) => {
                     >
                       <span className={StyleSheet.itemStyle}>
                         {" "}
-                        {row.id?.slice(0, 5)}
+                        {index + 1}
                       </span>
                     </TableCell>
 
