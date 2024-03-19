@@ -27,7 +27,9 @@ const Tasks = () => {
   };
   //**////////////////////////////////////////////////////////// */
   // useAuth context
-  const { setPages } = useAuth();
+  const { setPages,user } = useAuth();
+  console.log("#################", user);
+
   setPages("CRM Tasks");
   // useData context
   const { tasks } = useData();
@@ -38,7 +40,7 @@ const Tasks = () => {
       .then(({ data }) => {
         const { payload, message } = data;
         if (message === "successfully") {
-          setTasks(payload);
+          setTasks(payload?.filter((item) => item?.adminId === (user?.id).toString()));
           setConfirm(false);
           setSuccess(true);
         }

@@ -2,11 +2,11 @@
 .container {
   height: 600px;
   width: 100%;
-  display: flex;
+  display: flex !important;
   justify-content: flex-start;
-  flex-direction: column !important;
-  align-items: center;
-  gap: 70px;
+  /* flex-direction: column !important; */
+  align-items: flex-start;
+  gap: 50px;
 
 }
 

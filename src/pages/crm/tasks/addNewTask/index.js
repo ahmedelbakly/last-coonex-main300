@@ -113,7 +113,8 @@ const{ tasks, setTasks} = useData()
       const { payload, message,error} = data;
       if(message === "successfully") {
         setOverLaySuccess(true);
-        setTasks(payload)
+        console.log(payload);
+        setTasks(payload.filter((item) => item?.adminId === (auth.user.id).toString()));
 
       }
 

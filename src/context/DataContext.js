@@ -10,6 +10,8 @@ import axios from "axios";
 // ** Config
 import authConfig from "src/configs/auth";
 
+//** auth */
+
 // ** Defaults
 const defaultProvider = {
   tasks: [],
@@ -27,7 +29,10 @@ const DataProvider = ({ children }) => {
     axios
       .get("http://195.35.2.218:5000/api/tasks")
       .then((res) => {
-        setTasks(res.data);
+        const { id } = JSON.parse( localStorage.getItem('userData'));
+        console.log(id);
+        console.log(res.data?.filter((task) => task?.adminId == id));
+        setTasks(res.data?.filter((task) => task?.adminId == id));
       })
       .catch((err) => {
         console.log(err);
