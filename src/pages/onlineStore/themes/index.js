@@ -109,6 +109,7 @@ const StoreThemes = () => {
         {themesData.map(({ id, name, image }, index) => (
           <Grid
             item
+            key={id}
             xs={12}
             width={"32%"}
 

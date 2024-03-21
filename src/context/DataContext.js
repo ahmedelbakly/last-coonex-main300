@@ -25,19 +25,6 @@ const DataProvider = ({ children }) => {
   const [tasks, setTasks] = useState(defaultProvider.tasks);
 
   // set tasks from api
-  useEffect(() => {
-    axios
-      .get("http://195.35.2.218:5000/api/tasks")
-      .then((res) => {
-        const { id } = JSON.parse( localStorage.getItem('userData'));
-        console.log(id);
-        console.log(res.data?.filter((task) => task?.adminId == id));
-        setTasks(res.data?.filter((task) => task?.adminId == id));
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
 
   const values = {
     tasks,

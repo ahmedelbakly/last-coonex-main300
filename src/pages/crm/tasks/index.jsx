@@ -1,5 +1,5 @@
 import { Box, Grid } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import { useAuth } from "src/hooks/useAuth";
 import StyleSheet from "./style.module.css";
 import SearchIcon from "@mui/icons-material/Search";
@@ -20,7 +20,7 @@ const Tasks = () => {
   const [leadSourceValue, setLeadSourceValue] = useState("");
   //** state handle show filter */
   const [showFilter, setShowFilter] = useState(false);
-  const { Tasks, setTasks } = useData();
+  const { tasks, setTasks } = useData();
   //** method to handle show filter */
   const handleShowFilter = () => {
     setShowFilter(!showFilter);
@@ -32,7 +32,20 @@ const Tasks = () => {
 
   setPages("CRM Tasks");
   // useData context
-  const { tasks } = useData();
+
+  ;
+  useEffect(() => {
+    axios
+      .get("http://195.35.2.218:5000/api/tasks")
+      .then((res) => {
+        console.log(res.data?.filter((task) => task?.adminId == user?.id));
+        setTasks(res.data?.filter((task) => task?.adminId == user?.id));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [user?.id, setTasks]);
+  ;
   console.log("#################", tasks);
   const handleDeleteItem = (itemId, setConfirm, setSuccess) => {
     axios
@@ -46,6 +59,7 @@ const Tasks = () => {
         }
       });
   };
+
   return (
     <Grid container className={StyleSheet.container}>
       {/**start filter */}
